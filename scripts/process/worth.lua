@@ -1,0 +1,50 @@
+local process = Process("worth")
+
+function process:onStart()
+    
+    time.setTimeout(1, function()
+        Player(1):worth("=", { gold = 1, silver = 101, copper = 111 })
+        Player(1):worth("-", { silver = 110 })
+    end)
+    
+    print("上->下转换")
+    dump(worth.u2l({ silver = 44, gold = 1 }))
+    dump(worth.u2l({ gold = 1, silver = 2, copper = 3 }))
+    dump(worth.u2l({ gold = 2, copper = 1234 }))
+    
+    print("下->上转换")
+    dump(worth.l2u({ copper = 16400 }))
+    dump(worth.l2u({ copper = 11203 }))
+    dump(worth.l2u({ copper = 21374 }))
+    
+    print("数学运算")
+    dump(worth.cale({ gold = 100 }, "*", 0.5))
+    dump(worth.cale({ gold = 100 }, "/", 2))
+    dump(worth.cale(3, "*", { gold = 100 }))
+    dump(worth.cale({ gold = 100 }, "+", { gold = 100 }))
+    dump(worth.cale({ gold = 100 }, "-", { gold = 100 }))
+    
+    print("对比测试")
+    print('Compare1 ', worth.compare({ silver = 1, gold = 1 }, { silver = 98, copper = 22 }))
+    print('Compare2 ', worth.compare({ silver = 10, copper = 1000 }, { copper = 2000 }))
+    print('Compare3 ', worth.compare({ gold = 2 }, { copper = 1001, silver = 190 }))
+    print('Compare4 ', worth.compare({ gold = 2 }, { other = 5 }))
+    
+    print("子判断")
+    print('Equal1 ', worth.equal({ silver = 1, gold = 1 }, { silver = 1, gold = 1 }))
+    print('Equal2 ', worth.equal({ silver = 1, gold = 1 }, { copper = 66 }))
+    print('Equal3 ', worth.equal({ silver = 1, gold = 1 }, { silver = 1, gold = 1, other = 3 }))
+    print('Greater1 ', worth.greater({ silver = 10, copper = 1000 }, { copper = 1000 }))
+    print('Greater2 ', worth.greater({ silver = 10, copper = 1000 }, { copper = 3000 }))
+    print('Greater3 ', worth.greater({ silver = 10, copper = 1000 }, { other = 5 }))
+    print('Less1 ', worth.less({ gold = 2 }, { silver = 10 }))
+    print('Less2 ', worth.less({ gold = 2 }, { silver = 201 }))
+    print('Less3 ', worth.less({ gold = 2 }, { gold = 2, other = 1 }))
+    print('EqualOrGreater1 ', worth.equalOrGreater({ gold = 2, silver = 1 }, { gold = 2 }))
+    print('EqualOrGreater2 ', worth.equalOrGreater({ gold = 2 }, { gold = 2 }))
+    print('EqualOrGreater3 ', worth.equalOrGreater({ gold = 2 }, { other = 2 }))
+    print('EqualOrLess1 ', worth.equalOrLess({ gold = 2 }, { gold = 2 }))
+    print('EqualOrLess2 ', worth.equalOrLess({ gold = 2 }, { gold = 2, silver = 1 }))
+    print('EqualOrLess3 ', worth.equalOrLess({ gold = 2 }, { other = 2 }))
+
+end
