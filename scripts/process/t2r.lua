@@ -5,7 +5,7 @@ function process:onStart()
     local bubble = self:bubble()
     
     --japi.SetBlackBorders(0, 0.13)
-    local u1 = Unit(TPL_UNIT.HeroFlameLord, Player(1), 0, 0, 0)
+    local u1 = Unit(Player(1), TPL_UNIT.HeroFlameLord, 0, 0, 0)
     bubble.u1 = u1
     
     local t2rFrame = UIBackdrop("t2r", UIGame)

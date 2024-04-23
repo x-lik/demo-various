@@ -24,7 +24,7 @@ function process:onStart()
     
     for i = 1, #routes do
         local r = routes[i]
-        local u = Unit(TPL_UNIT.HeroFlameLord, Player(i), r[1][1], r[1][2], 0)
+        local u = Unit(Player(i), TPL_UNIT.HeroFlameLord, r[1][1], r[1][2], 0)
         bubble["u" .. i] = u
         u:orderRoute(true, r)
         u:period(5)

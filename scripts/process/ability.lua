@@ -1,7 +1,7 @@
 local process = Process("ability")
 
 function process:onStart()
-    local u1 = Unit(TPL_UNIT.HeroFlameLord, Player(1), 500, -500, 66.6)
+    local u1 = Unit(Player(1), TPL_UNIT.HeroFlameLord, 500, -500, 66.6)
         :level(1)
         :reborn(0.5)
         :hp(100)

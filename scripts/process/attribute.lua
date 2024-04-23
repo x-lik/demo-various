@@ -4,7 +4,7 @@ function process:onStart()
     
     local bubble = self:bubble()
     
-    bubble.DarkRanger = Unit(TPL_UNIT.DarkRanger, Player(1), 0, -1000, 270)
+    bubble.DarkRanger = Unit(Player(1), TPL_UNIT.DarkRanger, 0, -1000, 270)
     
     local it = Item(TPL_ITEM.IT3)
     it:level(1)

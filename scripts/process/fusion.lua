@@ -33,7 +33,7 @@ function process:onStart()
     end
     
     print("conflate-unit")
-    bubble.u = Unit(TPL_UNIT.DarkRanger, Player(1), 0, -500, 270)
+    bubble.u = Unit(Player(1), TPL_UNIT.DarkRanger, 0, -500, 270)
     bubble.u:itemSlot():insert(TPL_ITEM.HC1)
     fusion.conflate(bubble.u, TPL_ITEM.HC2, TPL_ITEM.HC3)
     
