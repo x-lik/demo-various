@@ -31,6 +31,6 @@ TPL_ABILITY.AB1 = AbilityTpl()
             end
             effectiveData.triggerAbility:exp("+=10")
             effectiveData.triggerUnit:abilityPoint("+=1")
-            class.destroy(Effect("DoomDeath", effectiveData.targetX, effectiveData.targetY, effectiveData.targetZ))
+            effect.point("DoomDeath", effectiveData.targetX, effectiveData.targetY, effectiveData.targetZ, 0)
         end)
     end)
