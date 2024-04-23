@@ -54,7 +54,7 @@ description.define("itemBase", function(this, options)
             end
         end
     end
-    local ab = this:bindAbilityTpl()
+    local ab = this:bindAbility()
     if (isVast(ab, AbilityClass)) then
         local tt = ab:targetType()
         if (isVast(this, ItemClass)) then
