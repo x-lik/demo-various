@@ -16,6 +16,6 @@ function process:onStart()
         print(enterData.triggerUnit:name())
     end)
     
-    Player(1):unit(TPL_UNIT.HeroFlameLord, 0, 0, 270)
+    Unit(Player(1), TPL_UNIT.HeroFlameLord, 0, 0, 270)
 
 end

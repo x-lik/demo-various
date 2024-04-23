@@ -27,7 +27,8 @@ function process:onStart()
                    } })
         :show(true)
     
-    Team("敌人", 3, true, true):members({ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 })
+    Team("敌人", 3, true, true)
+        :members({ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 })
     
     local running = false
     Player(1):onChat('%-', function(evtData)
@@ -82,8 +83,8 @@ function process:onStart()
                     var_text[n] = nil
                 elseif (type == "unit") then
                     --测试创建单位，成绩：83万
-                    --local u = Team("敌人").unit(TPL_UNIT.Footman, x, y, 270)
-                    local u = Player(1):unit(TPL_UNIT.DEMO, x, y, 270)
+                    --local u = Unit(Team("敌人"), TPL_UNIT.DEMO, x, y, 270)
+                    local u = Unit(Player(1), TPL_UNIT.DEMO, x, y, 270)
                     class.destroy(u, during)
                 elseif (type == "ttg") then
                     --测试模型漂浮字，成绩：50万 clear
