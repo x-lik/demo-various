@@ -28,15 +28,12 @@ game.onInit(function()
         local contentIndex = tonumber(syncData.transferData[3])
         -----@type Unit
         local lighter = class.i2o(uid)
-        -----@type Unit|Effect
+        -----@type Unit|Coordinate
         local balloonObj = class.i2o(mid)
-        if (false == isVast(lighter, UnitClass)) then
+        if (false == class.isObject(lighter, UnitClass)) then
             return
         end
-        if (false == inMeta(balloonObj, CoordinateClass, EffectClass)) then
-            return
-        end
-        if (false == isVast(balloonObj, UnitClass)) then
+        if (false == class.inObject(balloonObj, UnitClass, CoordinateClass)) then
             return
         end
         if (lighter:isInterrupt()) then
