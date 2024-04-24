@@ -75,7 +75,7 @@ function tooltipsAbility(whichAbility, lvOffset)
             end
         end
     end
-    if (isVast(whichAbility, AbilityClass)) then
+    if (class.isObject(whichAbility, AbilityClass)) then
         if (lv == whichAbility:level() and lv < whichAbility:levelMax()) then
             if (whichAbility:exp() > 0) then
                 local cur = whichAbility:exp() or 0

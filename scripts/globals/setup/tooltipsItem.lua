@@ -34,7 +34,7 @@ function tooltipsItem(whichItem)
             })
         end
     end
-    if (isVast(whichItem, ItemClass)) then
+    if (class.isObject(whichItem, ItemClass)) then
         local lv = whichItem:level()
         if (lv < whichItem:levelMax()) then
             if (whichItem:exp() > 0) then

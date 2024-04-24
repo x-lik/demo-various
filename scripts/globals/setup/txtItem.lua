@@ -55,9 +55,9 @@ description.define("itemBase", function(this, options)
         end
     end
     local ab = this:bindAbility()
-    if (isVast(ab, AbilityClass)) then
+    if (class.isObject(ab, AbilityClass)) then
         local tt = ab:targetType()
-        if (isVast(this, ItemClass)) then
+        if (class.isObject(this, ItemClass)) then
             if (tt ~= ability.targetType.pas and this:hotkey() ~= nil) then
                 name = name .. "（" .. colour.hex(colour.gold, "数字" .. this:hotkey()) .. "）"
             end

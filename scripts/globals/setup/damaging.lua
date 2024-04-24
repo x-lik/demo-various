@@ -9,7 +9,7 @@ end)
 damageFlow:flux("prop", function(data)
     data.defend = data.targetUnit:defend()
     data.avoid = data.targetUnit:avoid()
-    if (isVast(data.sourceUnit, UnitClass)) then
+    if (class.isObject(data.sourceUnit, UnitClass)) then
         data.avoid = data.avoid - data.sourceUnit:aim()
     end
 end)

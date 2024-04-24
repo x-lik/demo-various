@@ -6,7 +6,7 @@ description.define("abilityBase", function(this, options)
     local desc = {}
     local lv = math.floor(options.level or this:level())
     local tt = this:targetType()
-    if (isVast(this, AbilityClass)) then
+    if (class.isObject(this, AbilityClass)) then
         local lvTxt = ''
         if (this:levelMax() > 1) then
             lvTxt = " - 等级 " .. colour.hex(colour.gold, lv)

@@ -17,7 +17,7 @@ function tooltipsWarehouse(whichItem, whichPlayer)
         bars = {},
         list = {},
     }
-    if (isVast(whichPlayer, PlayerClass)) then
+    if (class.isObject(whichPlayer, PlayerClass)) then
         local wor = whichItem:worth()
         local cale = worth.cale(wor, "*", whichPlayer:recoveryRatio() * 0.01)
         for _, c in ipairs(icons) do
@@ -36,7 +36,7 @@ function tooltipsWarehouse(whichItem, whichPlayer)
             end
         end
     end
-    if (isVast(whichItem, ItemClass)) then
+    if (class.isObject(whichItem, ItemClass)) then
         local lv = whichItem:level()
         if (lv < whichItem:levelMax()) then
             if (whichItem:exp() > 0) then
