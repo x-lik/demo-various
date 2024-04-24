@@ -27,7 +27,7 @@ TPL_ABILITY.King = AbilityTpl()
         local atk = attackData.triggerAbility:modify("atk")
         local atkTarget = attackData.triggerAbility:modify("atkTarget")
         local atkTimer = attackData.triggerAbility:modify("atkTimer")
-        if (isMeta(atkTimer, TimerClass)) then
+        if (class.isObject(atkTimer, TimerClass)) then
             class.destroy(atkTimer)
         end
         local curAtk = 0

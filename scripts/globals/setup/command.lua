@@ -43,7 +43,7 @@ if (XLIK_DEBUG) then
         else
             proc = Process(p)
         end
-        if (isMeta(proc, ProcessClass)) then
+        if (class.isObject(proc, ProcessClass)) then
             print(p .. "流程已重置")
             ProcessCurrent:over()
             proc:start()
