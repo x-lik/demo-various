@@ -104,11 +104,11 @@ event.reactRegister(eventKind.unitBeStun, function(evtData)
 end)
 ---@param evtData evtOnUnitBeSplitData
 event.reactRegister(eventKind.unitBeSplit, function(evtData)
-    effect.unitPoint("SpellBreakerAttack", evtData.triggerUnit, 0)
+    effect.unit("SpellBreakerAttack", evtData.triggerUnit, 0)
 end)
 ---@param evtData evtOnUnitBeSplitSpreadData
 event.reactRegister(eventKind.unitBeSplitSpread, function(evtData)
-    effect.unitPoint("CleaveDamageTarget", evtData.triggerUnit, 0)
+    effect.unit("CleaveDamageTarget", evtData.triggerUnit, 0)
 end)
 ---@param evtData evtOnUnitBeShieldData
 event.reactRegister(eventKind.unitBeShield, function(evtData)
