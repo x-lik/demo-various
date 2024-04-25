@@ -10,7 +10,7 @@ game.onInit(function()
         japi.SetBlackBorders(0, 0)
     end
     --- UI -吐司提示
-    for i = 0, screen._max[UIToastClass] do
+    for i = 1, screen._max[UIToastClass] do
         UIToast(i)
     end
     --- UI - 血条
@@ -18,7 +18,7 @@ game.onInit(function()
         UIBarState(i)
     end
     --- UI - 气泡
-    for i = 0, screen._max[UIBalloonClass] do
+    for i = 1, screen._max[UIBalloonClass] do
         UIBalloon(i)
     end
     --
