@@ -17,19 +17,19 @@ function process:onStart()
     print("conflate->")
     local c = fusion.conflate(nil, TPL_ITEM.HC2, TPL_ITEM.HC3, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1)
     for _, v in ipairs(c) do
-        print("-->", v:name())
+        print("##", v:name())
     end
     
     print("separate->", TPL_ITEM.HCR:name())
     local s = fusion.separate(nil, TPL_ITEM.HCR)
     for _, v in ipairs(s) do
-        print("-->", v:name())
+        print("##", v:name())
     end
     
     print("separate-re->", TPL_ITEM.HCR:name())
     local s2 = fusion.separate(nil, TPL_ITEM.HCR, true)
     for _, v in ipairs(s2) do
-        print("-->", v:name())
+        print("##", v:name())
     end
     
     print("conflate-unit")
@@ -45,7 +45,7 @@ function process:onStart()
         local s3 = fusion.separate(bubble.u, TPL_ITEM.HCR, true)
         local x, y = bubble.u:x(), bubble.u:y()
         for _, v in ipairs(s3) do
-            print("-->", v:name())
+            print("##", v:name())
             -- The logic used here: Items that exceed are created in the game map
             Item(v):position(x, y)
         end
