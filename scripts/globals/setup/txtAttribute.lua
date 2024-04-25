@@ -138,7 +138,7 @@ description.define("attributes", function(this, options)
     local desc = {}
     local lv = math.floor(options.level or this:level())
     for _, a in ipairs(attributes) do
-        local method = a[1]
+        local param = a[1]
         local m2 = a[2] or 0
         local d1
         local d2
@@ -146,17 +146,17 @@ description.define("attributes", function(this, options)
             d1 = m2
             d2 = a[3] or d1
         elseif (type(m2) == "string") then
-            method = method .. '_' .. m2
+            param = param .. '_' .. m2
             d1 = a[3] or 0
             d2 = a[4] or d1
         end
-        local label = attribute.label(method)
+        local label = attribute.label(param)
         if (label ~= nil) then
             local v = d1
             if (lv > 1) then
                 v = v + (lv - 1) * d2
             end
-            table.insert(desc, attribute.format(method, v))
+            table.insert(desc, attribute.format(param, v))
         end
     end
     return desc
