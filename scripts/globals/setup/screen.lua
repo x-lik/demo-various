@@ -5,7 +5,7 @@ game.onInit(function()
     screen._max[UIBalloonClass] = BJ_MAX_PLAYERS
     screen._max[UIToastClass] = 20
     
-    if (true == _hideInterface) then
+    if (true == screen._hideInterface) then
         japi.DZ_FrameHideInterface()
         japi.SetBlackBorders(0, 0)
     end
