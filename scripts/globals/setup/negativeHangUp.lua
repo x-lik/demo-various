@@ -24,7 +24,7 @@ if (false == XLIK_DEBUG) then
                 end
                 local cx2, cy2 = camera.x(), camera.y()
                 if (click ~= true and cx == cx2 and cy == cy2) then
-                    class.asyncDestroy(curTimer)
+                    class.destroy(curTimer)
                     sync.send("negativeHangUp", { J.PlayerLocalIndex })
                     return
                 end

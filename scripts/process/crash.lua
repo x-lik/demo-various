@@ -85,7 +85,7 @@ function process:onStart()
                     --测试创建单位，成绩：83万
                     --local u = Unit(Team("敌人"), TPL_UNIT.DEMO, x, y, 270)
                     local u = Unit(Player(1), TPL_UNIT.DEMO, x, y, 270)
-                    class.destroy(u, during)
+                    u:duration(during)
                 elseif (type == "ttg") then
                     --测试模型漂浮字，成绩：50万 clear
                     mtg.word({
