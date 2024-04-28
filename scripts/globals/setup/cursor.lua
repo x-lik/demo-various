@@ -173,7 +173,6 @@ game.onStart(function()
                 csPointer:alpha(0)
                 return
             end
-            local drx = japi.UIDisAdaptive(rx)
             -- 压缩比例计算
             local adx = 0.8 - japi.UIAdaptive(csTexture.pointer.width)
             local rmp = 1
@@ -229,7 +228,7 @@ game.onStart(function()
             csPointer:texture(texture)
             csPointer:alpha(alpha + cn)
             csPointer:size(width, height)
-            csPointer:relation(align, UIGame, UI_ALIGN_LEFT_BOTTOM, drx, ry)
+            csPointer:relation(align, UIGame, UI_ALIGN_LEFT_BOTTOM, japi.UIDisAdaptive(rx), ry)
         end
     })
     
@@ -751,7 +750,7 @@ game.onStart(function()
         refresh = function(evtData)
             local data = cursor.currentData()
             local rx, ry = evtData.rx, evtData.ry
-            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry)
+            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, japi.UIDisAdaptive(rx), ry)
             ---@type UIDrag
             local ui = data.ui
             local a = ui:anchor()
