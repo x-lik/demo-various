@@ -1252,8 +1252,6 @@ assets_model("buildings\\other\\BookOfSummoning\\BookOfSummoning.mdl", "BookOfSu
 
 --【 物品模型 】
 
---物品宝箱
-assets_model("Objects\\InventoryItems\\TreasureChest\\treasurechest.mdl", "TreasureChest")
 --物品灵魂神符（紫色符文）
 assets_model("Objects\\InventoryItems\\runicobject\\runicobject.mdl", "RunicObject")
 --物品防御浮雕（橙色符文）
