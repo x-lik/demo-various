@@ -10,7 +10,7 @@ game.onStart(function()
         end
         local p = PlayerLocal()
         local o = p:selection()
-        if ((class.isObject(o, UnitClass) or class.isObject(o, ItemClass)) and o:isAlive() and false == o:isLocust()) then
+        if (class.isObject(o, UnitClass) and o:isAlive() and false == o:isLocust()) then
             local s = 72 * o:scale()
             if (s > 0) then
                 ---@type Image
@@ -33,31 +33,58 @@ game.onStart(function()
     end)
     
     --- 鼠标指向浮动信息面板
+    local lastUnder
     ---@param moveData evtOnMouseMoveData
     mouse.onMove("myTooltips", function(moveData)
+        if (cursor.isQuoting()) then
+            return
+        end
         local p, rx, ry = moveData.triggerPlayer, moveData.rx, moveData.ry
-        local drx = japi.UIDisAdaptive(rx)
-        local under = class.h2u(japi.DZ_GetUnitUnderMouse())
-        local tx, ty = drx, ry + 0.024
-        if (under ~= nil and under:owner() ~= p and false == under:isEnemy(p)) then
-            local tips = {}
-            if (class.isObject(under, UnitClass)) then
-                table.insert(tips, under:name())
-                if (under:level() > 0) then
-                    table.insert(tips, "Lv " .. under:level())
-                end
-            elseif (class.isObject(under, ItemClass)) then
-                table.insert(tips, under:name())
-                if (under:level() > 0) then
-                    table.insert(tips, "Lv " .. under:level())
-                end
+        local tx, ty = -1, -1
+        local tips, textAlign
+        if (class.isObject(lastUnder, ItemClass)) then
+            if (lastUnder:instance()) then
+                japi.DZ_SetEffectVertexAlpha(lastUnder._handle._handle, 125)
             end
+            lastUnder = nil
+        end
+        ---@type Unit|Item
+        local under = class.h2o(japi.DZ_GetUnitUnderMouse())
+        if (class.isObject(under, UnitClass)) then
+            if (under:owner() ~= p and false == under:isEnemy(p)) then
+                tx, ty = japi.UIDisAdaptive(rx), ry + 0.024
+                if (under:level() > 0) then
+                    tips = { under:name() .. " Lv." .. under:level() }
+                else
+                    tips = { under:name() }
+                end
+                textAlign = TEXT_ALIGN_CENTER
+            end
+        elseif (nil ~= class._cache[GridClass]) then
+            under = Grid(ItemClass):closest({
+                circle = {
+                    x = japi.DZ_GetMouseTerrainX(),
+                    y = japi.DZ_GetMouseTerrainY(),
+                    radius = 40
+                }
+            })
+            if (class.isObject(under, ItemClass)) then
+                japi.DZ_SetEffectVertexAlpha(under._handle._handle, 255)
+                lastUnder = under
+                rx, ry = japi.ConvertWorldPosition(under:x(), under:y(), under:z())
+                tx, ty = japi.UIDisAdaptive(rx), ry + 0.024
+                tips = description.combine(under, { lv = under:level() }, "itemBase")
+                textAlign = TEXT_ALIGN_LEFT
+            end
+        end
+        if (tx == -1 or tips == nil) then
+            UITooltips(0)
+                :show(false)
+        else
             UITooltips(0)
                 :relation(UI_ALIGN_BOTTOM, UIGame, UI_ALIGN_LEFT_BOTTOM, tx, ty)
-                :content({ tips = table.concat(tips, '|n') })
+                :content({ fontSize = 9, textAlign = textAlign, tips = table.concat(tips, '|n') })
                 :show(true)
-        else
-            UITooltips(0):show(false)
         end
     end)
     

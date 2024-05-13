@@ -1,7 +1,6 @@
 local process = Process("cale")
 
-process:onStart(function(_)
-    
+function process:onStart()
     
     print(math.cale("*=0.7", 10))
     print(math.cale("/=0.7", 10))
@@ -12,4 +11,4 @@ process:onStart(function(_)
     print(math.cale("*=-0.3", 10))
     print(math.cale("*=-8", 10))
 
-end)
+end
