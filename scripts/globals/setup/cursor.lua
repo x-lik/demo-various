@@ -837,10 +837,11 @@ game.onStart(function()
                                 return enumUnit ~= selection and enumUnit:isAlive() and enumUnit:owner() == selection:owner()
                             end
                         })
+                        local isTask = datum.ternary(keyboard.isPressing(keyboard.code["Shift"]), 1, 0)
                         if (class.isObject(closest, UnitClass)) then
-                            sync.send("G_GAME_SYNC", { "item_deliver_cursor", obj:id(), closest:id() })
+                            sync.send("G_GAME_SYNC", { "item_deliver_cursor", obj:id(), closest:id(), isTask })
                         else
-                            sync.send("G_GAME_SYNC", { "item_drop_cursor", obj:id(), tx, ty })
+                            sync.send("G_GAME_SYNC", { "item_drop_cursor", obj:id(), tx, ty, isTask })
                         end
                         cursor.quoteOver()
                     end
