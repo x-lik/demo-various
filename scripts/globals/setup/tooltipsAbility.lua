@@ -40,7 +40,7 @@ function tooltipsAbility(whichAbility, lvOffset)
                 val = whichAbility:mpCost(lv)
             end
             if (val > 0) then
-                if (uit ~= nil) then
+                 if (nil ~= uit) then
                     val = val .. " " .. uit
                 end
                 table.insert(content.icons, {
@@ -50,7 +50,7 @@ function tooltipsAbility(whichAbility, lvOffset)
             end
         elseif (method == "worth") then
             local wv = whichAbility:worthCost(lv)
-            if (wv ~= nil) then
+             if (nil ~= wv) then
                 local wk = {
                     { "lumber", "C49D5A", "木" },
                     { "gold", "ECD104", "金" },
@@ -63,7 +63,7 @@ function tooltipsAbility(whichAbility, lvOffset)
                     local uit = w[3]
                     local val = math.floor(wv[key] or 0)
                     if (val > 0) then
-                        if (uit ~= nil) then
+                         if (nil ~= uit) then
                             val = val .. " " .. uit
                         end
                         table.insert(content.icons, {
@@ -82,7 +82,7 @@ function tooltipsAbility(whichAbility, lvOffset)
                 local prev = game.abilityExpNeeds(lv)
                 local next = game.abilityExpNeeds(lv + 1)
                 local percent = math.trunc((cur - prev) / (next - prev), 3)
-                if (percent ~= nil) then
+                 if (nil ~= percent) then
                     table.insert(content.bars, {
                         texture = "Framework\\ui\\tile_yellow.tga",
                         text = colour.hex("E2C306", "经验：" .. math.floor(cur - prev) .. "/" .. math.ceil(next - prev)),

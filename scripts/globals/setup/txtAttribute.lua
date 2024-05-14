@@ -151,7 +151,7 @@ description.define("attributes", function(this, options)
             d2 = a[4] or d1
         end
         local label = attribute.label(param)
-        if (label ~= nil) then
+         if (nil ~= label) then
             local v = d1
             if (lv > 1) then
                 v = v + (lv - 1) * d2

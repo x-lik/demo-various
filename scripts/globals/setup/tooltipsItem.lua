@@ -24,7 +24,7 @@ function tooltipsItem(whichItem)
         local uit = c[3]
         local val = math.floor(cale[key] or 0)
         if (val > 0) then
-            if (uit ~= nil) then
+             if (nil ~= uit) then
                 val = val .. " " .. uit
             end
             val = 4000
@@ -42,7 +42,7 @@ function tooltipsItem(whichItem)
                 local prev = game.itemExpNeeds(lv)
                 local need = game.itemExpNeeds(lv + 1)
                 local percent = math.trunc((cur - prev) / (need - prev), 3)
-                if (percent ~= nil) then
+                 if (nil ~= percent) then
                     table.insert(content.bars, {
                         texture = "Framework\\ui\\tile_white.tga",
                         text = colour.hex(colour.white, "经验：" .. math.floor(cur - prev) .. "/" .. math.ceil(need - prev)),
