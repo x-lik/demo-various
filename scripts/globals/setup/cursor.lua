@@ -77,7 +77,7 @@ game.onStart(function()
                 textAlign = TEXT_ALIGN_LEFT
             end
         end
-        if (tx == -1 or tips == nil) then
+        if (-1 == tx or nil == tips) then
             UITooltips(0)
                 :show(false)
         else
@@ -147,7 +147,7 @@ game.onStart(function()
         end
         local p = PlayerLocal()
         local selection = p:selection()
-        if (selection == nil or selection:owner():id() ~= p:id()) then
+        if (nil == selection or selection:owner():id() ~= p:id()) then
             return false
         end
         if (ab:isBan() == true) then
@@ -536,7 +536,7 @@ game.onStart(function()
             end
             if (type(prevUnit) == "table") then
                 for _, u in ipairs(prevUnit) do
-                    if (renderAllow[u:id()] == nil) then
+                    if (nil == renderAllow[u:id()]) then
                         J.SetUnitVertexColor(u:handle(), table.unpack(u:rgba()))
                     end
                 end

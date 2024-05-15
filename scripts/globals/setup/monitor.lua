@@ -16,7 +16,7 @@ monitor.create(
         end
     end,
     function(obj)
-        return obj:isDead() or obj:hpRegen() == nil or obj:hpRegen() == 0
+        return obj:isDead() or nil == obj:hpRegen() or 0 == obj:hpRegen()
     end)
 
 --- 恢复魔法监听器
@@ -37,5 +37,5 @@ monitor.create(
         end
     end,
     function(obj)
-        return obj:isDead() or obj:mpRegen() == nil or obj:mpRegen() == 0
+        return obj:isDead() or nil == obj:mpRegen() or 0 == obj:mpRegen()
     end)
