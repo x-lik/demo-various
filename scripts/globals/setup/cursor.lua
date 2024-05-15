@@ -173,7 +173,7 @@ game.onStart(function()
         end
         local p = PlayerLocal()
         local selection = p:selection()
-        if (selection ~= nil and selection:owner() == p) then
+        if (nil ~= selection and selection:owner() == p) then
             J.EnableSelect(false, false)
             async.setTimeout(1, function()
                 J.SelectUnit(selection:handle(), true)
