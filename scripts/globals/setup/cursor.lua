@@ -65,7 +65,7 @@ game.onStart(function()
                 circle = {
                     x = japi.DZ_GetMouseTerrainX(),
                     y = japi.DZ_GetMouseTerrainY(),
-                    radius = 40
+                    radius = player.pickGridRadius
                 }
             })
             if (class.isObject(under, ItemClass)) then
