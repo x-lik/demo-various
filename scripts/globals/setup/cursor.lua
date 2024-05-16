@@ -54,7 +54,7 @@ game.onStart(function()
             if (under:owner() ~= p and false == under:isEnemy(p)) then
                 tx, ty = japi.UIDisAdaptive(rx), ry + 0.024
                 if (under:level() > 0) then
-                    tips = { under:name() .. " Lv." .. under:level() }
+                    tips = { " Lv " .. under:level(), under:name() }
                 else
                     tips = { under:name() }
                 end
