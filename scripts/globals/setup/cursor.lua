@@ -212,7 +212,6 @@ game.onStart(function()
                 rmp = math.min(rmp, ryp)
             end
             --
-            local align = UI_ALIGN_LEFT_TOP
             local texture = csTexture.pointer.normal
             local alpha = csTexture.pointer.alpha
             local width = csTexture.pointer.width * rmp
@@ -255,7 +254,7 @@ game.onStart(function()
             csPointer:texture(texture)
             csPointer:alpha(alpha + cn)
             csPointer:size(width, height)
-            csPointer:relation(align, UIGame, UI_ALIGN_LEFT_BOTTOM, japi.UIDisAdaptive(rx), ry)
+            csPointer:relation(UI_ALIGN_LEFT_TOP, UIGame, UI_ALIGN_LEFT_BOTTOM, japi.UIDisAdaptive(rx), ry)
         end
     })
     
@@ -319,7 +318,6 @@ game.onStart(function()
                 csPointer:alpha(0)
                 return
             end
-            local align = UI_ALIGN_CENTER
             local alpha = csTexture.aim.alpha
             local texture = csTexture.aim.normal
             local width = csTexture.aim.width
@@ -360,7 +358,7 @@ game.onStart(function()
             csPointer:texture(texture)
             csPointer:alpha(alpha)
             csPointer:size(width, height)
-            csPointer:relation(align, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry)
+            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry)
         end,
         ---@param evtData evtOnMouseLeftClickData
         leftClick = function(evtData)
@@ -412,7 +410,6 @@ game.onStart(function()
                 csPointer:alpha(0)
                 return
             end
-            local align = UI_ALIGN_CENTER
             local alpha = csTexture.aim.alpha
             local texture = csTexture.aim.normal
             local width = csTexture.aim.width
@@ -424,7 +421,7 @@ game.onStart(function()
             csPointer:texture(texture)
             csPointer:alpha(alpha)
             csPointer:size(width, height)
-            csPointer:relation(align, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry)
+            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry)
         end,
         ---@param evtData evtOnMouseLeftClickData
         leftClick = function(evtData)
