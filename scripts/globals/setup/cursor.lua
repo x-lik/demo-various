@@ -797,7 +797,6 @@ game.onStart(function()
     
     cursor.setQuote("follow", {
         start = function()
-            csPointer:alpha(0)
             local data = cursor.currentData()
             ---@type Ability|Item
             local obj = data.object
@@ -806,7 +805,7 @@ game.onStart(function()
             local texture, width, height
             if (class.inObject(ui, UIButtonClass, UIBackdropClass)) then
                 texture = ui._texture
-                width = ui._width
+                width = ui._widthAdaptive
                 height = ui._height
             else
                 texture = data.texture
