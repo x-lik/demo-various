@@ -25,7 +25,7 @@ TPL_ABILITY.AB1 = AbilityTpl()
     function(effectiveData)
         local ftp = 1
         time.setInterval(ftp, function(curTimer)
-            if (false == effectiveData.triggerUnit:isAbilityKeepCasting()) then
+            if (false == effectiveData.triggerUnit:isAbilityKeeping()) then
                 class.destroy(curTimer)
                 return
             end

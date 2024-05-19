@@ -158,7 +158,7 @@ game.onStart(function()
             alerter.message(p, true, "无法行动", 255, 0, 0)
             return false
         end
-        if (selection:isAbilityChantCasting() or selection:isAbilityKeepCasting()) then
+        if (selection:isAbilityChanting() or selection:isAbilityKeeping()) then
             alerter.message(p, true, "施法中")
             return false
         end
@@ -325,7 +325,7 @@ game.onStart(function()
             ---@type Unit|Item
             local under = class.h2u(japi.DZ_GetUnitUnderMouse())
             ---@type Unit
-            local isBan = bu:isInterrupt() or bu:isPause() or bu:isAbilityChantCasting() or bu:isAbilityKeepCasting()
+            local isBan = bu:isInterrupt() or bu:isPause() or bu:isAbilityChanting() or bu:isAbilityKeeping()
             if (isBan) then
                 alpha = math.ceil(alpha / 2)
             end
@@ -414,7 +414,7 @@ game.onStart(function()
             local texture = csTexture.aim.normal
             local width = csTexture.aim.width
             local height = csTexture.aim.height
-            local isBan = bu:isInterrupt() or bu:isPause() or bu:isAbilityChantCasting() or bu:isAbilityKeepCasting()
+            local isBan = bu:isInterrupt() or bu:isPause() or bu:isAbilityChanting() or bu:isAbilityKeeping()
             if (isBan) then
                 alpha = math.ceil(alpha / 2)
             end
