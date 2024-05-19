@@ -309,7 +309,7 @@ game.onStart(function()
             end
             ---@type Unit
             local bu = ab:bindUnit()
-            if (ab:isBan() or ab:coolDownRemain() > 0 or false == class.isObject(bu, UnitClass)) then
+            if (ab:isBan() or ab:coolingRemain() > 0 or false == class.isObject(bu, UnitClass)) then
                 cursor.quoteOver()
                 return
             end
@@ -401,7 +401,7 @@ game.onStart(function()
             end
             ---@type Unit
             local bu = ab:bindUnit()
-            if (ab:isBan() or ab:coolDownRemain() > 0 or false == class.isObject(bu, UnitClass)) then
+            if (ab:isBan() or ab:coolingRemain() > 0 or false == class.isObject(bu, UnitClass)) then
                 cursor.quoteOver()
                 return
             end
@@ -476,7 +476,7 @@ game.onStart(function()
             end
             ---@type Unit
             local bu = ab:bindUnit()
-            if (ab:isBan() or ab:coolDownRemain() > 0 or false == class.isObject(bu, UnitClass)) then
+            if (ab:isBan() or ab:coolingRemain() > 0 or false == class.isObject(bu, UnitClass)) then
                 cursor.quoteOver()
                 return
             end
@@ -627,7 +627,7 @@ game.onStart(function()
             end
             ---@type Unit
             local bu = ab:bindUnit()
-            if (ab:isBan() or ab:coolDownRemain() > 0 or false == class.isObject(bu, UnitClass)) then
+            if (ab:isBan() or ab:coolingRemain() > 0 or false == class.isObject(bu, UnitClass)) then
                 cursor.quoteOver()
                 return
             end

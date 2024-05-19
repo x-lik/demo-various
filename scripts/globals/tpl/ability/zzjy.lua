@@ -10,7 +10,7 @@ TPL_ABILITY.ZZJY = AbilityTpl()
     :levelUpNeedPoint(2)
     :onUnitEvent(eventKind.unitHurt,
     function(hurtData)
-        hurtData.triggerAbility:effective()
+        hurtData.triggerAbility:spell()
     end)
     :onEvent(eventKind.abilityEffective,
     function(effectiveData)
