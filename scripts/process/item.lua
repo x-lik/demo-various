@@ -26,16 +26,16 @@ function process:onStart()
     
     bubble.u1 = u1
     
-    --local x1 = os.clock()
-    --for i = 1, 10 do
-    --    local it = Item(TPL_ITEM.IT1):position(0, -300)
-    --    bubble["it1" .. i] = it
-    --end
-    --for i = 1, 10 do
-    --    local it = Item(TPL_ITEM.IT2):position(0, -300)
-    --    bubble["it2" .. i] = it
-    --end
-    --
-    --local x2 = os.clock()
-    --print(string.format("run time: %.2f\n", x2 - x1))
+    local x1 = os.clock()
+    for i = 1, 10 do
+        local it = Item(TPL_ITEM.IT1):position(0, -300)
+        bubble["it1" .. i] = it
+    end
+    for i = 1, 10 do
+        local it = Item(TPL_ITEM.IT2):position(0, -300)
+        bubble["it2" .. i] = it
+    end
+    
+    local x2 = os.clock()
+    print(string.format("run time: %.2f\n", x2 - x1))
 end
