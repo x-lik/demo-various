@@ -22,7 +22,7 @@ game.onInit(function()
         UIBalloon(i)
     end
     --
-    sync.receive("BALLOON", function(syncData)
+    sync.receive("_lk_balloon", function(syncData)
         local uid = syncData.transferData[1]
         local mid = syncData.transferData[2]
         local contentIndex = tonumber(syncData.transferData[3])
