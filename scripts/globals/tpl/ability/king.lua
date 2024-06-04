@@ -24,9 +24,9 @@ TPL_ABILITY.King = AbilityTpl()
     :modify("atk", 0)
     :onUnitEvent(eventKind.unitAttack,
     function(attackData)
-        local atk = attackData.triggerAbility:modify("atk")
-        local atkTarget = attackData.triggerAbility:modify("atkTarget")
-        local atkTimer = attackData.triggerAbility:modify("atkTimer")
+        local atk = attackData.triggerAbility._atk
+        local atkTarget = attackData.triggerAbility._atkTarget
+        local atkTimer = attackData.triggerAbility._atkTimer
         if (class.isObject(atkTimer, TimerClass)) then
             class.destroy(atkTimer)
         end
@@ -37,8 +37,8 @@ TPL_ABILITY.King = AbilityTpl()
             curAtk = atk + 1
         end
         local diff = curAtk - atk
-        attackData.triggerAbility:modify("atk", curAtk)
-        attackData.triggerAbility:modify("atkTarget", attackData.targetUnit:id())
+        attackData.triggerAbility._atk = curAtk
+        attackData.triggerAbility._atkTarget = attackData.targetUnit:id()
         if (diff ~= 0) then
             if (diff > 0) then
                 attackData.triggerUnit:crit("+=" .. (diff * 5))
@@ -47,17 +47,17 @@ TPL_ABILITY.King = AbilityTpl()
                 attackData.triggerUnit:crit("-=" .. (-diff * 5))
                 attackData.triggerUnit:odds("crit", "-=" .. (-diff * 2.5))
             end
-            attackData.triggerAbility:modify("atkTimer", time.setTimeout(3, function()
+            attackData.triggerAbility._atkTimer = time.setTimeout(3, function()
                 if (class.isDestroy(attackData.triggerAbility) == false) then
-                    local a = attackData.triggerAbility:modify("atk")
+                    local a = attackData.triggerAbility._atk
                     if (a > 0) then
                         attackData.triggerUnit:crit("-=" .. (a * 5))
                         attackData.triggerUnit:odds("crit", "-=" .. (a * 2.5))
                     end
-                    attackData.triggerAbility:clear("atkTimer")
-                    attackData.triggerAbility:clear("atkTarget")
-                    attackData.triggerAbility:modify("atk", 0)
+                    attackData.triggerAbility._atkTimer = nil
+                    attackData.triggerAbility._atkTarget = nil
+                    attackData.triggerAbility._atk = 0
                 end
-            end))
+            end)
         end
     end)
