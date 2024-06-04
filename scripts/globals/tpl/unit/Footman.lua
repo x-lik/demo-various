@@ -1,5 +1,6 @@
 TPL_UNIT.Footman = UnitTpl("Footman")
     :preItem({ TPL_ITEM.IT1, TPL_ITEM.IT2 })
+    :name("小步兵")
     :model("Footman")
     :icon("unit\\Footman")
     :weaponSound("metal_slice_medium")
