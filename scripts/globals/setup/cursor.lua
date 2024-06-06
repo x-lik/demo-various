@@ -358,7 +358,7 @@ game.onStart(function()
             csPointer:texture(texture)
             csPointer:alpha(alpha)
             csPointer:size(width, height)
-            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry)
+            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, japi.UIDisAdaptive(rx), ry)
         end,
         ---@param evtData evtOnMouseLeftClickData
         leftClick = function(evtData)
@@ -421,7 +421,7 @@ game.onStart(function()
             csPointer:texture(texture)
             csPointer:alpha(alpha)
             csPointer:size(width, height)
-            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry)
+            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, japi.UIDisAdaptive(rx), ry)
         end,
         ---@param evtData evtOnMouseLeftClickData
         leftClick = function(evtData)
