@@ -760,7 +760,6 @@ game.onStart(function()
             local ui = data.ui
             local a = ui:anchor()
             local rx, ry = japi.MouseRX(), japi.MouseRY()
-            csPointer:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, japi.UIDisAdaptive(rx), ry)
             _float1 = rx - a[1]
             _float2 = ry - a[2]
         end,
