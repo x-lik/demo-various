@@ -179,9 +179,19 @@ game.onStart(function()
                 J.SelectUnit(selection:handle(), true)
             end)
         end
+        ---@type UI_LikPlate
+        local uiLikPlate = UIKit("lik_plate")
+        uiLikPlate:buttonBorder(ab)
         return abilityCheck(ab)
     end
     local abilityOver = function()
+        local data = cursor.currentData()
+        local ab = data.ability
+        if (ab) then
+            ---@type UI_LikPlate
+            local uiLikPlate = UIKit("lik_plate")
+            uiLikPlate:buttonBorder(ab)
+        end
         _timer1 = async.setTimeout(60, function()
             J.EnableSelect(true, false)
         end)
