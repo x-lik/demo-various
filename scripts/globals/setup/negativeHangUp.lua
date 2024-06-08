@@ -30,7 +30,7 @@ if (false == XLIK_DEBUG) then
                 end
                 cx, cy = cx2, cy2
                 click = false
-                curTimer:setPeriod(frame + 300)
+                curTimer:period(frame + 300)
             end)
         end)
     

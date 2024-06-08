@@ -23,22 +23,22 @@ function process:onStart()
         end
         tt:text(t1:remain() .. '/' .. t1:period())
         if (t1:remain() == 110) then
-            t1:setRemain(100)
+            t1:remain(100)
             t1:pause()
             time.setTimeout(3, function()
                 t1:resume()
             end)
         end
         if (t1:remain() == 95) then
-            t1:setRemain(120)
-            t1:setPeriod(125)
+            t1:remain(120)
+            t1:period(125)
         end
         if (t1:remain() == 50) then
-            t1:setRemain(20)
-            t1:setPeriod(30)
+            t1:remain(20)
+            t1:period(30)
         end
         if (t1:remain() == 5) then
-            t1:setRemain(1)
+            t1:remain(1)
         end
     end)
     
