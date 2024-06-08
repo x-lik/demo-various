@@ -18,7 +18,7 @@ TPL_ABILITY.King = AbilityTpl()
             targetUnit = attackData.targetUnit,
             damage = 100,
             damageSrc = injury.damageSrc.ability,
-            damageType = { injury.damageType.thunder }
+            damageType = injury.damageType.thunder
         })
     end)
     :modify("atk", 0)
