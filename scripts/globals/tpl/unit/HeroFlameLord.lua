@@ -1,7 +1,7 @@
 --- 火焰巨魔
 TPL_UNIT.HeroFlameLord = UnitTpl("HeroFireLord")
     :preAbility({ TPL_ABILITY.AB1, TPL_ABILITY.AB2, TPL_ABILITY.AB3, TPL_ABILITY.AB4, TPL_ABILITY.King })
-    :preItem({ TPL_ITEM.IT1, TPL_ITEM.IT2, TPL_ITEM.IT1, TPL_ITEM.IT2, TPL_ITEM.IT4 })
+    :preItem({ TPL_ITEM.IT1, TPL_ITEM.IT2, TPL_ITEM.IT3, TPL_ITEM.IT4 })
     :name("火焰巨魔")
     :model("HeroFlameLord")
     :scale(1.2)
