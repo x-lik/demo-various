@@ -15,9 +15,10 @@ function process:onStart()
     
     ---@type Unit[]
     for j = 1, 5 do
-        local u2 = Unit(Player(2), TPL_UNIT.Footman, 0, -1500, 90)
+        local u2 = Unit(Player(2), TPL_UNIT.Footman, 0, -2500, 90)
         u2:hp(1000)
         u2:attack(100)
+        u2:attackSpaceBase(5)
         u2:move(0)
         bubble["u2" .. j] = u2
     end

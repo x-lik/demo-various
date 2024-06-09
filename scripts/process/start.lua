@@ -6,6 +6,6 @@ function process:onStart()
     fog.enable(not XLIK_DEBUG)
     fog.maskEnable(not XLIK_DEBUG)
     
-    self:next("reborn")
+    self:next("battle")
 
 end
