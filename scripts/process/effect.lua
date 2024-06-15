@@ -9,7 +9,7 @@ function process:onStart()
     local status = false
     local size = 1.0
     local v255 = 255
-    eff.timer = time.setInterval(0, function()
+    bubble.timer = time.setInterval(0, function()
         if (status) then
             v255 = v255 + 2
             size = size - 0.03
