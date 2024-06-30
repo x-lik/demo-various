@@ -1,0 +1,1 @@
+game.setExpNeedsParams("unit", 100, 100, 0.05, 100000)
