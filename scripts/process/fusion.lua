@@ -3,6 +3,7 @@ local process = Process("fusion")
 function process:onStart()
     
     local bubble = self:bubble()
+    bubble.u1 = Unit(Player(1), TPL_UNIT.HeroFlameLord, 0, -200, 270)
     
     fusion.formula(TPL_ITEM.HC2, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1)
     fusion.formula(TPL_ITEM.HC4, TPL_ITEM.HC2, TPL_ITEM.HC3)
@@ -13,6 +14,18 @@ function process:onStart()
         f2s = fusion._f2s,
         sqr = fusion._sqr,
     })
+    
+    print("conflate->unit->")
+    local it1, it2, it3 = Item(TPL_ITEM.HC1), Item(TPL_ITEM.HC1), Item(TPL_ITEM.HC1)
+    it1:position(-100, -200)
+    it2:position(0, -200)
+    it3:position(100, -200)
+    time.setTimeout(3, function()
+        local c = fusion.conflate(bubble.u1, it1, it2, it3)
+        for _, v in ipairs(c) do
+            print("##", v:name())
+        end
+    end)
     
     print("conflate->")
     local c = fusion.conflate(nil, TPL_ITEM.HC2, TPL_ITEM.HC3, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1)
