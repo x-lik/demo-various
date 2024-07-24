@@ -28,19 +28,19 @@ function process:onStart()
     end)
     
     print("conflate->")
-    local c = fusion.conflate(nil, TPL_ITEM.HC2, TPL_ITEM.HC3, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1)
+    local c = fusion.virtualConflate(TPL_ITEM.HC2, TPL_ITEM.HC3, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1, TPL_ITEM.HC1)
     for _, v in ipairs(c) do
         print("##", v:name())
     end
     
     print("separate->", TPL_ITEM.HCR:name())
-    local s = fusion.separate(nil, TPL_ITEM.HCR)
+    local s = fusion.virtualSeparate(TPL_ITEM.HCR)
     for _, v in ipairs(s) do
         print("##", v:name())
     end
     
     print("separate-re->", TPL_ITEM.HCR:name())
-    local s2 = fusion.separate(nil, TPL_ITEM.HCR, true)
+    local s2 = fusion.virtualSeparate(TPL_ITEM.HCR, true)
     for _, v in ipairs(s2) do
         print("##", v:name())
     end
