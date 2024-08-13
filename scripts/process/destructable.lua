@@ -27,7 +27,7 @@ function process:onStart()
     end)
     
     ---@param deadData evtOnDestructableDeadData
-    event.reactRegister(eventKind.destructableDead, function(deadData)
+    destructable.onDead("destructable", function(deadData)
         local handle = deadData.triggerDestructable
         local x = destructable.getX(handle)
         local y = destructable.getY(handle)
