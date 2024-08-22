@@ -5,9 +5,9 @@ function tooltipsAbility(whichAbility, lvOffset)
         return nil
     end
     local types = {
-        { "coolDown", "15DF89", "秒" },
-        { "hpCost", "DE5D43", "血" },
-        { "mpCost", "83B3E4", "蓝" },
+        { "coolDown", "15DF89", "秒", X_UI_ICON_COOL_DOWN },
+        { "hpCost", "DE5D43", "血", X_UI_ICON_HP_COST },
+        { "mpCost", "83B3E4", "蓝", X_UI_ICON_MP_COST },
         { "worth" },
     }
     lvOffset = lvOffset or 0
@@ -40,22 +40,22 @@ function tooltipsAbility(whichAbility, lvOffset)
                 val = whichAbility:mpCost(lv)
             end
             if (val > 0) then
-                 if (nil ~= uit) then
+                if (nil ~= uit) then
                     val = val .. " " .. uit
                 end
                 table.insert(content.icons, {
-                    texture = "Framework\\ui\\" .. method .. ".tga",
+                    texture = c[4],
                     text = colour.hex(color, val),
                 })
             end
         elseif (method == "worth") then
             local wv = whichAbility:worthCost(lv)
-             if (nil ~= wv) then
+            if (nil ~= wv) then
                 local wk = {
-                    { "lumber", "C49D5A", "木" },
-                    { "gold", "ECD104", "金" },
-                    { "silver", "E3E3E3", "银" },
-                    { "copper", "EC6700", "铜" }
+                    { "lumber", "C49D5A", "木", X_UI_ICON_LUMBER },
+                    { "gold", "ECD104", "金", X_UI_ICON_GOLD },
+                    { "silver", "E3E3E3", "银", X_UI_ICON_SILVER },
+                    { "copper", "EC6700", "铜", X_UI_ICON_COPPER }
                 }
                 for _, w in ipairs(wk) do
                     local key = w[1]
@@ -63,11 +63,11 @@ function tooltipsAbility(whichAbility, lvOffset)
                     local uit = w[3]
                     local val = math.floor(wv[key] or 0)
                     if (val > 0) then
-                         if (nil ~= uit) then
+                        if (nil ~= uit) then
                             val = val .. " " .. uit
                         end
                         table.insert(content.icons, {
-                            texture = "Framework\\ui\\" .. key .. ".tga",
+                            texture = c[4],
                             text = colour.hex(color, val),
                         })
                     end
@@ -82,9 +82,9 @@ function tooltipsAbility(whichAbility, lvOffset)
                 local prev = game.abilityExpNeeds(lv)
                 local next = game.abilityExpNeeds(lv + 1)
                 local percent = math.trunc((cur - prev) / (next - prev), 3)
-                 if (nil ~= percent) then
+                if (nil ~= percent) then
                     table.insert(content.bars, {
-                        texture = "Framework\\ui\\tile_yellow.tga",
+                        texture = X_UI_TILE_YELLOW,
                         text = colour.hex("E2C306", "经验：" .. math.floor(cur - prev) .. "/" .. math.ceil(next - prev)),
                         ratio = percent,
                         width = 0.10,

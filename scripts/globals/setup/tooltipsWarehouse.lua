@@ -6,10 +6,10 @@ function tooltipsWarehouse(whichItem, whichPlayer)
         return nil
     end
     local icons = {
-        { "lumber", "C49D5A", "木" },
-        { "gold", "ECD104", "金" },
-        { "silver", "E3E3E3", "银" },
-        { "copper", "EC6700", "铜" }
+        { "lumber", "C49D5A", "木", X_UI_ICON_LUMBER },
+        { "gold", "ECD104", "金", X_UI_ICON_GOLD },
+        { "silver", "E3E3E3", "银", X_UI_ICON_SILVER },
+        { "copper", "EC6700", "铜", X_UI_ICON_COPPER }
     }
     local content = {
         tips = description.combine(whichItem, nil, "itemBase"),
@@ -30,7 +30,7 @@ function tooltipsWarehouse(whichItem, whichPlayer)
                     val = val .. " " .. uit
                 end
                 table.insert(content.icons, {
-                    texture = "Framework\\ui\\" .. key .. ".tga",
+                    texture = c[4],
                     text = colour.hex(color, val),
                 })
             end
@@ -46,7 +46,7 @@ function tooltipsWarehouse(whichItem, whichPlayer)
                 local percent = math.trunc((cur - prev) / (need - prev), 3)
                  if (nil ~= percent) then
                     table.insert(content.bars, {
-                        texture = "Framework\\ui\\tile_white.tga",
+                        texture = X_UI_TILE_WHITE,
                         text = colour.hex(colour.white, "经验：" .. math.floor(cur - prev) .. "/" .. math.ceil(need - prev)),
                         ratio = percent,
                         width = 0.10,

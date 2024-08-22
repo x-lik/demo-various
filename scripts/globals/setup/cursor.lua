@@ -1,8 +1,11 @@
 -- 指针配置
-cursor._imgFollow = cursor._imgFollow or UIBackdrop("myFollow", UIGame):show(false) -- 跟踪比指针底层所以先定义
-cursor._imgPointer = cursor._imgPointer or UIBackdrop("myPointer", UIGame):adaptive(true):size(0.01, 0.01)
-cursor._imgArea = cursor._imgArea or Image("Framework\\ui\\nil.tga", 16, 16)
-cursor._imgArea:show(false)
+game.onStart(function()
+    cursor._imgFollow = UIBackdrop("myFollow", UIGame):show(false) -- 跟踪比指针底层所以先定义
+    cursor._imgPointer = UIBackdrop("myPointer", UIGame):adaptive(true):size(0.01, 0.01)
+    cursor._imgArea = Image(X_UI_NIL, 16, 16)
+    cursor._imgArea:show(false)
+end)
+
 -- 区域贴图尺寸变化量，方形时以高为1做比例替换，小于等于0即瞬间变化完成
 local csSizeRate = 0
 -- 配置各种指针贴图【Framework已准备一些基本图】
@@ -25,16 +28,16 @@ local csTexture = {
         alpha = 255,
         width = 0.04,
         height = 0.04,
-        normal = "Framework\\ui\\cursorDrag.tga"
+        normal = X_UI_CURSOR_DRAG
     },
     aim = {
         alpha = 255,
         width = 0.035,
         height = 0.035,
-        normal = "Framework\\ui\\cursorAimWhite.tga",
-        ally = "Framework\\ui\\cursorAimGreen.tga",
-        enemy = "Framework\\ui\\cursorAimRed.tga",
-        neutral = "Framework\\ui\\cursorAimGold.tga",
+        normal = X_UI_CURSOR_AIM_WHITE,
+        ally = X_UI_CURSOR_AIM_GREEN,
+        enemy = X_UI_CURSOR_AIM_RED,
+        neutral = X_UI_CURSOR_AIM_GOLD,
     },
     circle = nil,
     square = {

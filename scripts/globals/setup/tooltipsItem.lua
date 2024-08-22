@@ -5,10 +5,10 @@ function tooltipsItem(whichItem)
         return nil
     end
     local icons = {
-        { "lumber", "C49D5A", "木" },
-        { "gold", "ECD104", "金" },
-        { "silver", "E3E3E3", "银" },
-        { "copper", "EC6700", "铜" }
+        { "lumber", "C49D5A", "木", X_UI_ICON_LUMBER },
+        { "gold", "ECD104", "金", X_UI_ICON_GOLD },
+        { "silver", "E3E3E3", "银", X_UI_ICON_SILVER },
+        { "copper", "EC6700", "铜", X_UI_ICON_COPPER }
     }
     local content = {
         tips = description.combine(whichItem, nil, "itemBase"),
@@ -24,12 +24,12 @@ function tooltipsItem(whichItem)
         local uit = c[3]
         local val = math.floor(cale[key] or 0)
         if (val > 0) then
-             if (nil ~= uit) then
+            if (nil ~= uit) then
                 val = val .. " " .. uit
             end
             val = 4000
             table.insert(content.icons, {
-                texture = "Framework\\ui\\" .. key .. ".tga",
+                texture = c[4],
                 text = colour.hex(color, val),
             })
         end
@@ -42,9 +42,9 @@ function tooltipsItem(whichItem)
                 local prev = game.itemExpNeeds(lv)
                 local need = game.itemExpNeeds(lv + 1)
                 local percent = math.trunc((cur - prev) / (need - prev), 3)
-                 if (nil ~= percent) then
+                if (nil ~= percent) then
                     table.insert(content.bars, {
-                        texture = "Framework\\ui\\tile_white.tga",
+                        texture = X_UI_TILE_WHITE,
                         text = colour.hex(colour.white, "经验：" .. math.floor(cur - prev) .. "/" .. math.ceil(need - prev)),
                         ratio = percent,
                         width = 0.10,
