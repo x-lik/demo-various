@@ -7,9 +7,11 @@ end
 ---@param evtData evtOnUnitKillData
 event.reactRegister(eventKind.unitKill, function(evtData)
     local owner = evtData.targetUnit:owner()
-    if (owner:selection() == evtData.targetUnit) then
-        owner:selection(evtData.triggerUnit)
-    end
+    async.call(owner, function()
+        if (japi.Selection() == evtData.targetUnit) then
+            japi.Select(evtData.triggerUnit)
+        end
+    end)
 end)
 ---@param evtData evtOnUnitCritData
 event.reactRegister(eventKind.unitCrit, function(evtData)

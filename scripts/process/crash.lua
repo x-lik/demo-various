@@ -31,7 +31,7 @@ function process:onStart()
         :members({ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 })
     
     local running = false
-    Player(1):onChat('%-', function(evtData)
+    player.onChat('%-', function(evtData)
         local chatString = evtData.chatString
         local chatOptions = string.explode(' ', chatString)
         local type = string.gsub(chatOptions[1] or "", "-", "")
