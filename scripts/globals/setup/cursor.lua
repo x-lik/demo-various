@@ -57,7 +57,7 @@ game.onStart(function()
             return false
         end
         local p = PlayerLocal()
-        local selection = japi.Selection()
+        local selection = p:selection()
         if (nil == selection or selection:owner():id() ~= p:id()) then
             return false
         end
@@ -83,7 +83,7 @@ game.onStart(function()
             _timer1 = nil
         end
         local p = PlayerLocal()
-        local selection = japi.Selection()
+        local selection = p:selection()
         if (nil ~= selection and selection:owner() == p) then
             J.EnableSelect(false, false)
             async.setTimeout(1, function()
@@ -738,7 +738,7 @@ game.onStart(function()
             
             if (class.isObject(obj, ItemClass) and obj:dropable()) then
                 local p = PlayerLocal()
-                local selection = japi.Selection()
+                local selection = p:selection()
                 if (p == selection:owner()) then
                     mouse.onLeftClick("followDrop", function(evtData)
                         if (mouse.isSafety(evtData.rx, evtData.ry)) then
