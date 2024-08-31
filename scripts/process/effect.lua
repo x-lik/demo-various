@@ -4,7 +4,7 @@ function process:onStart()
     
     local bubble = self:bubble()
     
-    local eff = effect.agile("GlaiveMissile", 0, 0, 100)
+    local eff = effector.agile("GlaiveMissile", 0, 0, 100)
     bubble.eff = eff
     local status = false
     local size = 1.0
@@ -23,16 +23,16 @@ function process:onStart()
                 status = not status
             end
         end
-        effect.size(eff, size)
-        effect.alpha(eff, v255)
-        effect.color(eff, 255, 255, 255, v255)
-        effect.position(eff, japi.DZ_GetMouseTerrainX(), japi.DZ_GetMouseTerrainY(), japi.DZ_GetMouseTerrainZ() + 100)
+        effector.size(eff, size)
+        effector.alpha(eff, v255)
+        effector.color(eff, 255, 255, 255, v255)
+        effector.position(eff, japi.DZ_GetMouseTerrainX(), japi.DZ_GetMouseTerrainY(), japi.DZ_GetMouseTerrainZ() + 100)
     end)
 end
 
 function process:onOver()
     local bubble = self:bubble()
-    effect.destroy(bubble.timer)
-    effect.destroy(bubble.eff)
+    effector.destroy(bubble.timer)
+    effector.destroy(bubble.eff)
 end
 

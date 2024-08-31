@@ -13,11 +13,11 @@ event.reactRegister(eventKind.unitKill, function(evtData)
 end)
 ---@param evtData evtOnUnitCritData
 event.reactRegister(eventKind.unitCrit, function(evtData)
-    effect.attach(evtData.targetUnit, "lik_crit", "origin", 0.5)
+    effector.attach(evtData.targetUnit, "lik_crit", "origin", 0.5)
 end)
 ---@param evtData evtOnUnitCritAbilityData
 event.reactRegister(eventKind.unitCritAbility, function(evtData)
-    effect.attach(evtData.targetUnit, "lik_crit_ability", "origin", 0.5)
+    effector.attach(evtData.targetUnit, "lik_crit_ability", "origin", 0.5)
     mtg.model({
         model = "lik_ttg_crit",
         size = 1.4,
@@ -31,11 +31,11 @@ event.reactRegister(eventKind.unitCritAbility, function(evtData)
 end)
 ---@param evtData evtOnUnitAvoidData
 event.reactRegister(eventKind.unitAvoid, function(evtData)
-    effect.attach(evtData.triggerUnit, "lik_ttg_avoid", "overhead", 0.3)
+    effector.attach(evtData.triggerUnit, "lik_ttg_avoid", "overhead", 0.3)
 end)
 ---@param evtData evtOnUnitImmuneInvincibleData
 event.reactRegister(eventKind.unitImmuneInvincible, function(evtData)
-    effect.attach(evtData.triggerUnit, "DivineShieldTarget", "origin", 1)
+    effector.attach(evtData.triggerUnit, "DivineShieldTarget", "origin", 1)
     mtg.model({
         model = "lik_ttg_immune_invincible",
         size = 1.2,
@@ -84,31 +84,31 @@ event.reactRegister(eventKind.unitImmuneEnchant, function(evtData)
 end)
 ---@param evtData evtOnUnitHPSuckAttackData
 event.reactRegister(eventKind.unitHPSuckAttack, function(evtData)
-    effect.attach(evtData.triggerUnit, "HealTarget2", "origin", 0.5)
+    effector.attach(evtData.triggerUnit, "HealTarget2", "origin", 0.5)
 end)
 ---@param evtData evtOnUnitHPSuckAbilityData
 event.reactRegister(eventKind.unitHPSuckAbility, function(evtData)
-    effect.attach(evtData.triggerUnit, "HealTarget2", "origin", 0.5)
+    effector.attach(evtData.triggerUnit, "HealTarget2", "origin", 0.5)
 end)
 ---@param evtData evtOnUnitMPSuckAttackData
 event.reactRegister(eventKind.unitMPSuckAttack, function(evtData)
-    effect.attach(evtData.triggerUnit, "AImaTarget", "origin", 0.5)
+    effector.attach(evtData.triggerUnit, "AImaTarget", "origin", 0.5)
 end)
 ---@param evtData evtOnUnitMPSuckAbilityData
 event.reactRegister(eventKind.unitMPSuckAbility, function(evtData)
-    effect.attach(evtData.triggerUnit, "AImaTarget", "origin", 0.5)
+    effector.attach(evtData.triggerUnit, "AImaTarget", "origin", 0.5)
 end)
 ---@param evtData evtOnUnitBeStunData
 event.reactRegister(eventKind.unitBeStun, function(evtData)
-    effect.attach(evtData.triggerUnit, "ThunderclapTarget", "overhead", evtData.duration)
+    effector.attach(evtData.triggerUnit, "ThunderclapTarget", "overhead", evtData.duration)
 end)
 ---@param evtData evtOnUnitBeSplitData
 event.reactRegister(eventKind.unitBeSplit, function(evtData)
-    effect.unit("SpellBreakerAttack", evtData.triggerUnit, 0)
+    effector.unit("SpellBreakerAttack", evtData.triggerUnit, 0)
 end)
 ---@param evtData evtOnUnitBeSplitSpreadData
 event.reactRegister(eventKind.unitBeSplitSpread, function(evtData)
-    effect.unit("CleaveDamageTarget", evtData.triggerUnit, 0)
+    effector.unit("CleaveDamageTarget", evtData.triggerUnit, 0)
 end)
 ---@param evtData evtOnUnitBeShieldData
 event.reactRegister(eventKind.unitBeShield, function(evtData)

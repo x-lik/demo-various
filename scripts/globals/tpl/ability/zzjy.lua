@@ -16,7 +16,7 @@ TPL_ABILITY.ZZJY = AbilityTpl()
     function(effectiveData)
         -- 技能被触发的效果
         local tu = effectiveData.triggerUnit
-        effect.attach(tu, "DivineShieldTarget", "origin", 3)
+        effector.attach(tu, "DivineShieldTarget", "origin", 3)
         Buff({
             key = "自在极意被动",
             object = tu,

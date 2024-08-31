@@ -9,7 +9,7 @@ function process:onStart()
             -500, -1000,
             ---@param orderUnit Unit
             function(orderUnit)
-                effect.unit("HCancelDeath", orderUnit, 0)
+                effector.unit("HCancelDeath", orderUnit, 0)
                 orderUnit:orderRouteResume()
             end
         },
