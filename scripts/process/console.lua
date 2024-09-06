@@ -41,7 +41,7 @@ function process:onStart()
         local number = tonumber(chatOptions[4]) or 1000
         local during = tonumber(chatOptions[5]) or 3
         if (type == "" or table.includes({ "var", "unit", "ttg", "mtg", "effect", "timer", "stop" }, type) == false) then
-            error(type)
+            print("Error:" .. type)
             return
         end
         if (type == 'stop') then
@@ -88,17 +88,10 @@ function process:onStart()
                     local u = Unit(Player(1), TPL_UNIT.DEMO, x, y, 270)
                     u:duration(during)
                 elseif (type == "ttg") then
-                    --测试模型漂浮字，成绩：50万 clear
-                    mtg.word({
-                        style = "default",
-                        str = math.rand(10000, 99999),
-                        width = 10,
-                        size = 0.25,
-                        x = math.rand(-500, 500),
-                        y = math.rand(-500, 500),
-                        z = math.rand(0, 300),
-                        height = 250,
-                        duration = 0.5,
+                    --测试原生漂浮字，成绩：50万 clear
+                    ttg.display(math.rand(-500, 500), math.rand(-500, 500), math.rand(10000, 99999), during, {
+                        size = math.rand(8, 11),
+                        zOffset = math.rand(200, 300)
                     })
                 elseif (type == "mtg") then
                     --测试模型漂浮字，成绩：50万 clear
@@ -111,7 +104,7 @@ function process:onStart()
                         y = math.rand(-500, 500),
                         z = math.rand(0, 300),
                         height = 250,
-                        duration = 0.5,
+                        duration = during,
                     })
                 elseif (type == "effect") then
                     --测试特效，成绩：100万 clear
