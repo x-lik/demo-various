@@ -1,4 +1,4 @@
-local process = Process("crash")
+local process = Process("console")
 
 function process:onStart()
     
@@ -6,6 +6,7 @@ function process:onStart()
         var = "变量清空",
         unit = "创建单位",
         ttg = "创建飘浮字",
+        mtg = "创建模型字",
         effect = "创建特效",
         timer = "创建计时器",
     }
