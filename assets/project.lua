@@ -8,7 +8,8 @@ assets_icon("black")
 
 assets_model("buff/Echo", "Echo")
 
-assets_sound("vwp", "metal_slice_medium") --武器声音，每种3段
+assets_vwp("metal_slice_medium") --武器声音，每种3段
+assets_vwp("cannon_hit") --武器声音，每种3段
 
 assets_ui("lik_msg")
 assets_ui("lik_menu")
