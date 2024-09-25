@@ -1,7 +1,14 @@
---【 音效 】
 
-assets_bgm("BloonsTD6 - Fiesta Flamenco", "td6")
-assets_bgm("Sound\\Music\\mp3Music\\Human1.mp3", "Human1")
+--【 乐曲 】
+
+assets_bgm("Sound\\Music\\mp3Music\\Human1", "Human1")
+
+--【 打击音效 】
+
+assets_vwp("metal_slice_medium") --武器声音，每种3段
+assets_vwp("cannon_hit") --武器声音，每种3段
+
+--【 常规音效 】
 
 assets_vcm("Sound\\Interface\\Error.wav", "war3_Error")
 assets_vcm("Sound\\Interface\\HeroDropItem1.wav", "war3_HeroDropItem1")

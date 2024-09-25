@@ -30,7 +30,7 @@ assets_model("ttg/WordOrange6", "xlik_word_6")
 assets_model("ttg/WordOrange7", "xlik_word_7")
 assets_model("ttg/WordOrange8", "xlik_word_8")
 assets_model("ttg/WordOrange9", "xlik_word_9")
-assets_model("ttg/WordOrangeCrit3", "xlik_word_crit")
+assets_model("ttg/WordOrangeCrit1", "xlik_word_crit")
 
 assets_model("interface/BossAlert") -- 指示器[条]100*750
 assets_model("interface/BossAlertRing") -- 指示器[圆]160

@@ -1,0 +1,1 @@
+assets_icon("black")
