@@ -5,9 +5,9 @@ function tooltipsAbility(whichAbility, lvOffset)
         return nil
     end
     local types = {
-        { "coolDown", "15DF89", "秒", X_UI_ICON_COOL_DOWN },
-        { "hpCost", "DE5D43", "血", X_UI_ICON_HP_COST },
-        { "mpCost", "83B3E4", "蓝", X_UI_ICON_MP_COST },
+        { "coolDown", "15DF89", "秒", "interfaces/iconCoolDown" },
+        { "hpCost", "DE5D43", "血", "interfaces/iconHPCost" },
+        { "mpCost", "83B3E4", "蓝", "interfaces/iconMPCost" },
         { "worth" },
     }
     lvOffset = lvOffset or 0
@@ -52,10 +52,10 @@ function tooltipsAbility(whichAbility, lvOffset)
             local wv = whichAbility:worthCost(lv)
             if (nil ~= wv) then
                 local wk = {
-                    { "lumber", "C49D5A", "木", X_UI_ICON_LUMBER },
-                    { "gold", "ECD104", "金", X_UI_ICON_GOLD },
-                    { "silver", "E3E3E3", "银", X_UI_ICON_SILVER },
-                    { "copper", "EC6700", "铜", X_UI_ICON_COPPER }
+                    { "lumber", "C49D5A", "木", "interfaces/iconLumber" },
+                    { "gold", "ECD104", "金", "interfaces/iconGold" },
+                    { "silver", "E3E3E3", "银", "interfaces/iconSilver" },
+                    { "copper", "EC6700", "铜", "interfaces/iconCopper" }
                 }
                 for _, w in ipairs(wk) do
                     local key = w[1]
@@ -84,7 +84,7 @@ function tooltipsAbility(whichAbility, lvOffset)
                 local percent = math.trunc((cur - prev) / (next - prev), 3)
                 if (nil ~= percent) then
                     table.insert(content.bars, {
-                        texture = X_UI_TILE_YELLOW,
+                        texture = "interfaces/tileYellow",
                         text = colour.hex("E2C306", "经验：" .. math.floor(cur - prev) .. "/" .. math.ceil(next - prev)),
                         ratio = percent,
                         width = 0.10,
