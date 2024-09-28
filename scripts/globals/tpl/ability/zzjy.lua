@@ -20,7 +20,7 @@ TPL_ABILITY.ZZJY = AbilityTpl()
         Buff({
             key = "自在极意被动",
             object = tu,
-            icon = "ability/SunnyDoll",
+            icon = "icon/ability/SunnyDoll",
             duration = 3,
             ---@param buffObj Unit
             purpose = function(buffObj)
