@@ -187,7 +187,7 @@ game.onStart(function()
                 return false
             end
             sound.vcm("war3_MouseClick1")
-            sync.send("_lk_sync_g", { "ability_effective", ab:id() })
+            sync.send("_xlk_sync_g", { "ability_effective", ab:id() })
             cursor.quoteOver()
         end,
     })
@@ -205,7 +205,7 @@ game.onStart(function()
             if (ab:isCastTarget(u)) then
                 if (_unitU == u) then
                     _unitU = nil
-                    sync.send("_lk_sync_g", { "ability_effective_u", ab:id(), u:id() })
+                    sync.send("_xlk_sync_g", { "ability_effective_u", ab:id(), u:id() })
                     return false
                 end
             end
@@ -291,7 +291,7 @@ game.onStart(function()
                 if (ab:isCastTarget(targetUnit) == false) then
                     alerter.message(evtData.triggerPlayer, true, "目标不允许")
                 else
-                    sync.send("_lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id() })
+                    sync.send("_xlk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id() })
                     cursor.quoteOver()
                 end
             end
@@ -359,7 +359,7 @@ game.onStart(function()
                 alerter.message(evtData.triggerPlayer, true, "无效目标")
                 return
             end
-            sync.send("_lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            sync.send("_xlk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
             cursor.quoteOver()
         end,
     })
@@ -510,7 +510,7 @@ game.onStart(function()
                 alerter.message(evtData.triggerPlayer, true, "无效范围")
                 return
             end
-            sync.send("_lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            sync.send("_xlk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
             cursor.quoteOver()
         end,
     })
@@ -662,7 +662,7 @@ game.onStart(function()
                 alerter.message(evtData.triggerPlayer, true, "无效范围")
                 return
             end
-            sync.send("_lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            sync.send("_xlk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
             cursor.quoteOver()
         end,
     })
@@ -757,9 +757,9 @@ game.onStart(function()
                             })
                             local isTask = datum.ternary(keyboard.isPressing(keyboard.code["Shift"]), 1, 0)
                             if (class.isObject(closest, UnitClass)) then
-                                sync.send("_lk_sync_g", { "item_deliver_cursor", obj:id(), closest:id(), isTask })
+                                sync.send("_xlk_sync_g", { "item_deliver_cursor", obj:id(), closest:id(), isTask })
                             else
-                                sync.send("_lk_sync_g", { "item_drop_cursor", obj:id(), tx, ty, isTask })
+                                sync.send("_xlk_sync_g", { "item_drop_cursor", obj:id(), tx, ty, isTask })
                             end
                             cursor.quoteOver()
                         end
