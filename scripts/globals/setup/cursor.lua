@@ -61,7 +61,7 @@ game.onStart(function()
         if (nil == selection or selection:owner():id() ~= p:id()) then
             return false
         end
-        if (ab:isBan() == true) then
+        if (true == ab:isBan()) then
             alerter.message(p, true, ab:banReason())
             return false
         end
@@ -156,7 +156,7 @@ game.onStart(function()
             local half = math.ceil((alpha or 255) / 3)
             local cn = _int1
             if (isFleshing) then
-                if (_bool1 ~= true) then
+                if (true ~= _bool1) then
                     cn = cn + ci
                     if (cn >= 0) then
                         cn = 0
@@ -290,7 +290,7 @@ game.onStart(function()
             ---@type Unit
             local targetUnit = _unit1
             if (class.isObject(targetUnit, UnitClass)) then
-                if (ab:isCastTarget(targetUnit) == false) then
+                if (false == ab:isCastTarget(targetUnit)) then
                     alerter.message(evtData.triggerPlayer, true, "目标不允许")
                 else
                     sync.send("xlk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id() })
