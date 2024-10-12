@@ -86,8 +86,9 @@ game.onStart(function()
         local selection = p:selection()
         if (nil ~= selection and selection:owner() == p) then
             J.EnableSelect(false, false)
-            async.setTimeout(1, function()
+            _timer1 = async.setTimeout(1, function()
                 J.SelectUnit(selection:handle(), true)
+                _timer1 = nil
             end)
         end
         ---@type UI_LikPlate
@@ -105,6 +106,7 @@ game.onStart(function()
         end
         _timer1 = async.setTimeout(60, function()
             J.EnableSelect(true, false)
+            _timer1 = nil
         end)
     end
     
