@@ -16,8 +16,6 @@ TPL_ABILITY.AB3 = AbilityTpl()
             animate = "attack",
             acceleration = 0,
             height = 100,
-            shake = nil,
-            reflex = nil,
             onMove = function()
                 print("move")
             end,
