@@ -110,5 +110,20 @@ function process:onStart()
     --    class.destroy(u)
     --    print(string.format("Time: %.3f", os.clock() - x1))
     --end
+    
+    -- attr
+    --do
+    --    collectgarbage("collect")
+    --    local u = Unit(Player(1), TPL_UNIT.Footman, 0, 0, 0)
+    --    u:level(1)
+    --    u:levelMax(99999)
+    --    local x1 = os.clock()
+    --    for _ = 1, 100000 do
+    --        local exp = u:exp()
+    --        u:exp(exp + 1)
+    --    end
+    --    class.destroy(u)
+    --    print(string.format("Time: %.3f", os.clock() - x1))
+    --end
 
 end
