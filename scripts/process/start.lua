@@ -6,6 +6,6 @@ function process:onStart()
     fog.enable(not XLIK_DEBUG)
     fog.maskEnable(not XLIK_DEBUG)
     
-    self:next("battle")
+    self:next("performance")
 
 end

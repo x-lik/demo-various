@@ -34,20 +34,5 @@ function process:onStart()
     --    point2 = 0.6,
     --    offset2 = 300,
     --})
-    local num = 1000
-    for _ = 1, num do
-        local x1, y1 = math.rand(-3000, -1500), math.rand(-2000, 2000)
-        local x2, y2 = math.rand(1500, 3000), math.rand(-2000, 2000)
-        local h = math.rand(800, 1000)
-        ability.missile({
-            model = "ProcMissile",
-            sourceVec = { x1, y1 },
-            targetVec = { x2, y2 },
-            frequency = 0.02,
-            speed = 1000,
-            height = h,
-            acceleration = 0,
-        })
-    end
 
 end
