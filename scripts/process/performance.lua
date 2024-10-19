@@ -35,6 +35,21 @@ function process:onStart()
     --    print(string.format("Time: %.3f", os.clock() - x1))
     --end
     
+    -- effect
+    --do
+    --    collectgarbage("collect")
+    --    local data = {}
+    --    local x1 = os.clock()
+    --    for _ = 1, 10000 do
+    --        table.insert(data, effector.agile("OrbVenomMissile", 0, 0, 0))
+    --    end
+    --    for _, v in ipairs(data) do
+    --        effector.destroy(v)
+    --    end
+    --    data = nil
+    --    print(string.format("Time: %.3f", os.clock() - x1))
+    --end
+    
     -- unit
     --do
     --    collectgarbage("collect")
@@ -60,21 +75,6 @@ function process:onStart()
     --    end
     --    for _, v in ipairs(data) do
     --        class.destroy(v)
-    --    end
-    --    data = nil
-    --    print(string.format("Time: %.3f", os.clock() - x1))
-    --end
-    
-    -- effect
-    --do
-    --    collectgarbage("collect")
-    --    local data = {}
-    --    local x1 = os.clock()
-    --    for _ = 1, 10000 do
-    --        table.insert(data, effector.agile("OrbVenomMissile", 0, 0, 0))
-    --    end
-    --    for _, v in ipairs(data) do
-    --        effector.destroy(v)
     --    end
     --    data = nil
     --    print(string.format("Time: %.3f", os.clock() - x1))
@@ -125,5 +125,29 @@ function process:onStart()
     --    class.destroy(u)
     --    print(string.format("Time: %.3f", os.clock() - x1))
     --end
-
+    
+    -- orderRoute
+    do
+        local path = {
+            { -500, -1000, },
+            { 500, -1000, },
+            { 500, -2000, },
+            { -500, -2000 },
+        }
+        local routes = {}
+        for i = 1, #path do
+            routes[i] = table.wheel(path, 1 * (i - 1))
+        end
+        local bubble = self:bubble()
+        time.setInterval(1, function()
+            for i = 1, #routes do
+                local r = routes[i]
+                local u = Unit(Player(i), TPL_UNIT.Footman, r[1][1], r[1][2], 0)
+                superposition.plus(u, "locust")
+                bubble[u:id()] = u
+                u:orderRoute(true, r)
+            end
+        end)
+    end
+    
 end
