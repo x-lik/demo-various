@@ -50,28 +50,15 @@ function process:onStart()
     --    print(string.format("Time: %.3f", os.clock() - x1))
     --end
     
-    -- unit
+    -- obj
     --do
     --    collectgarbage("collect")
     --    local data = {}
     --    local x1 = os.clock()
-    --    for _ = 1, 2000 do
-    --        table.insert(data, Unit(Player(1), TPL_UNIT.Footman, 0, 0, 0))
-    --    end
-    --    for _, v in ipairs(data) do
-    --        class.destroy(v)
-    --    end
-    --    data = nil
-    --    print(string.format("Time: %.3f", os.clock() - x1))
-    --end
-    
-    -- item
-    --do
-    --    collectgarbage("collect")
-    --    local data = {}
-    --    local x1 = os.clock()
-    --    for _ = 1, 2000 do
-    --        table.insert(data, Item(TPL_ITEM.IT1))
+    --    for _ = 1, 10000 do
+    --        --table.insert(data, Unit(Player(1), TPL_UNIT.Footman, 0, 0, 0)) -- unit
+    --        --table.insert(data, Item(TPL_ITEM.IT1)) -- item
+    --        table.insert(data, Ability(TPL_ABILITY.AB1)) -- ability
     --    end
     --    for _, v in ipairs(data) do
     --        class.destroy(v)
@@ -100,54 +87,66 @@ function process:onStart()
     
     -- attr
     --do
-    --    collectgarbage("collect")
-    --    local u = Unit(Player(1), TPL_UNIT.Footman, 0, 0, 0)
-    --    local x1 = os.clock()
-    --    for _ = 1, 100000 do
-    --        local atk = u:attack()
-    --        u:attack(atk + 1)
-    --    end
-    --    class.destroy(u)
-    --    print(string.format("Time: %.3f", os.clock() - x1))
-    --end
-    
-    -- attr
-    --do
-    --    collectgarbage("collect")
     --    local u = Unit(Player(1), TPL_UNIT.Footman, 0, 0, 0)
     --    u:level(1)
     --    u:levelMax(99999)
+    --    collectgarbage("collect")
     --    local x1 = os.clock()
     --    for _ = 1, 100000 do
-    --        local exp = u:exp()
-    --        u:exp(exp + 1)
+    --        -- defend(not jasscall)
+    --        --local def = u:defend()
+    --        --u:defend(def + 1)
+    --        -- attack(with jasscall)
+    --        --local atk = u:attack()
+    --        --u:attack(atk + 1)
+    --        -- exp(with data cale)
+    --        --local exp = u:exp()
+    --        --u:exp(exp + 1)
+    --        -- buff
+    --        Buff({
+    --            key = "test_buff",
+    --            object = u,
+    --            name = "测试buff",
+    --            icon = "icon/ability/ChainLightning",
+    --            description = "description",
+    --            duration = 1,
+    --            ---@param buffObj Unit
+    --            purpose = function(buffObj)
+    --                buffObj:str("+=1")
+    --            end,
+    --            ---@param buffObj Unit
+    --            rollback = function(buffObj)
+    --                buffObj:str("-=1")
+    --            end
+    --        })
+    --        BuffClear(u, { key = "test_buff" })
     --    end
-    --    class.destroy(u)
     --    print(string.format("Time: %.3f", os.clock() - x1))
+    --    class.destroy(u)
     --end
     
     -- orderRoute
-    do
-        local path = {
-            { -500, -1000, },
-            { 500, -1000, },
-            { 500, -2000, },
-            { -500, -2000 },
-        }
-        local routes = {}
-        for i = 1, #path do
-            routes[i] = table.wheel(path, 1 * (i - 1))
-        end
-        local bubble = self:bubble()
-        time.setInterval(1, function()
-            for i = 1, #routes do
-                local r = routes[i]
-                local u = Unit(Player(i), TPL_UNIT.Footman, r[1][1], r[1][2], 0)
-                superposition.plus(u, "locust")
-                bubble[u:id()] = u
-                u:orderRoute(true, r)
-            end
-        end)
-    end
-    
+    --do
+    --    local path = {
+    --        { -500, -1000, },
+    --        { 500, -1000, },
+    --        { 500, -2000, },
+    --        { -500, -2000 },
+    --    }
+    --    local routes = {}
+    --    for i = 1, #path do
+    --        routes[i] = table.wheel(path, 1 * (i - 1))
+    --    end
+    --    local bubble = self:bubble()
+    --    time.setInterval(1, function()
+    --        for i = 1, #routes do
+    --            local r = routes[i]
+    --            local u = Unit(Player(i), TPL_UNIT.Footman, r[1][1], r[1][2], 0)
+    --            superposition.plus(u, "locust")
+    --            bubble[u:id()] = u
+    --            u:orderRoute(true, r)
+    --        end
+    --    end)
+    --end
+
 end
