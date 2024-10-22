@@ -88,7 +88,7 @@ function process:onStart()
                     local u = Unit(Player(1), TPL_UNIT.DEMO, x, y, 270)
                     u:duration(during)
                 elseif (type == "ttg") then
-                    --测试原生漂浮字，成绩：50万 clear
+                    --测试原生漂浮字
                     ttg.display(math.rand(-500, 500), math.rand(-500, 500), math.rand(10000, 99999), during, {
                         size = math.rand(8, 11),
                         zOffset = math.rand(200, 300)
