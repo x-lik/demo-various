@@ -4,6 +4,6 @@ local a = AbilityTpl()
 
 TPL_ITEM.IT3 = ItemTpl()
     :name("物品3")
-    :icon(TEAM_COLOR_BLP_BROWN)
+    :icon(BLP_COLOR_BROWN)
     :levelMax(5)
     :bindAbilityTpl(a)

@@ -11,7 +11,7 @@ function process:onStart()
     local t2rUI = UIBackdrop("t2r", UIGame)
         :relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, 0, 0)
         :size(0.04, 0.004)
-        :texture(TEAM_COLOR_BLP_PURPLE)
+        :texture(BLP_COLOR_PURPLE)
     bubble.t2rFrame = t2rUI
     
     japi.AsyncRefresh("testT2R", function()
