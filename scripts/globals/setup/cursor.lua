@@ -94,7 +94,7 @@ game.onStart(function()
             return false
         end
         if (selection:isInterrupt() or selection:isPause()) then
-            alerter.message(p, true, "无法行动", 255, 0, 0)
+            alerter.message(p, true, "无法行动", colour.red)
             return false
         end
         if (selection:isAbilityChanting() or selection:isAbilityKeeping()) then
