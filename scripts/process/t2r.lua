@@ -14,16 +14,30 @@ function process:onStart()
         :texture(BLP_COLOR_PURPLE)
     bubble.t2rFrame = t2rUI
     
-    japi.AsyncRefresh("testT2R", function()
+    local _do = function()
         local rx, ry = japi.ConvertWorldPosition(u1:x(), u1:y(), 130 + u1:stature() + u1:h())
+        --print("屏幕xy=", rx, ry)
         if (rx == -1 or ry == -1) then
             t2rUI:show(false)
             return
         end
-        print("屏幕xy=", rx, ry)
         t2rUI:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry):show(true)
-    end)
-
+    end
+    local _do2 = function()
+        japi.DZ_ConvertWorldPosition(u1:x(), u1:y(), 130 + u1:stature() + u1:h(), function()
+            i = i + 1
+            local rx, ry = japi.DZ_GetConvertWorldPositionX(), japi.DZ_GetConvertWorldPositionY()
+            --print("屏幕xy=", rx, ry)
+            if (rx == -1 or ry == -1) then
+                t2rUI:show(false)
+                return
+            end
+            t2rUI:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_LEFT_BOTTOM, rx, ry):show(true)
+        end)
+    end
+    
+    japi.AsyncRefresh("testT2R", _do)
+    --
 end
 
 function process:onOver()
