@@ -7,7 +7,7 @@ function process:onStart()
     local u1 = Unit(Player(1), TPL_UNIT.HeroFlameLord, 0, -2500, 66.6)
     u1:abilitySlot():setTail(6)
     
-    ---@param damageData evtOnUnitDamageData
+    ---@param damageData eventOnUnitDamage
     u1:onEvent(eventKind.unitDamage, function(damageData)
         damageData.triggerUnit:exp("+=10")
     end)

@@ -1,4 +1,4 @@
----@param effectiveData evtOnAbilityEffectiveData
+---@param effectiveData eventOnAbilityEffective
 TPL_ABILITY.AB3 = AbilityTpl()
     :name("技能3")
     :targetType(ability.targetType.loc)

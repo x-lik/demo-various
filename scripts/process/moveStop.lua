@@ -6,7 +6,7 @@ function process:onStart()
     
     local u1 = Unit(Player(1), TPL_UNIT.HeroFlameLord, 0, 0, 0)
     
-    ---@param evtData evtOnUnitMoveStopData
+    ---@param evtData eventOnUnitMoveStop
     u1:onEvent(eventKind.unitMoveStop, "test", function(evtData)
         print("途径距离", evtData.distance)
     end)

@@ -1,4 +1,4 @@
----@param effectiveData evtOnAbilityEffectiveData
+---@param effectiveData eventOnAbilityEffective
 TPL_ABILITY. AB2 = AbilityTpl()
     :name("沉默一波")
     :targetType(ability.targetType.unit)

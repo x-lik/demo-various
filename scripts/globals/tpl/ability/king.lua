@@ -1,4 +1,4 @@
----@param attackData evtOnUnitAttackData
+---@param attackData eventOnUnitAttack
 TPL_ABILITY.King = AbilityTpl()
     :name("唯我独尊")
     :targetType(ability.targetType.pas)

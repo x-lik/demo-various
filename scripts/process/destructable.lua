@@ -26,7 +26,7 @@ function process:onStart()
         end
     end)
     
-    ---@param deadData evtOnDestructableDeadData
+    ---@param deadData eventOnDestructableDead
     destructable.onDead("destructable", function(deadData)
         local handle = deadData.triggerDestructable
         local x = destructable.getX(handle)

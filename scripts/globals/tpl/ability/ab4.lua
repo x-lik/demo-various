@@ -1,4 +1,4 @@
----@param effectiveData evtOnAbilityEffectiveData
+---@param effectiveData eventOnAbilityEffective
 TPL_ABILITY.AB4 = AbilityTpl()
     :name("技能4")
     :targetType(ability.targetType.square)

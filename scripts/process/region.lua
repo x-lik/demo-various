@@ -3,13 +3,13 @@ local process = Process("region")
 function process:onStart()
     
     local r = Region("中心判断区", "square", 0, 0, 500, 500)
-    ---@param enterData evtOnRegionEnterData
+    ---@param enterData eventOnRegionEnter
     r:onEvent(eventKind.regionEnter, function(enterData)
         print("Enter")
         print(enterData.triggerRegion:name())
         print(enterData.triggerUnit:name())
     end)
-    ---@param enterData evtOnRegionLeaveData
+    ---@param enterData eventOnRegionLeave
     r:onEvent(eventKind.regionLeave, function(enterData)
         print("Leave")
         print(enterData.triggerRegion:name())
