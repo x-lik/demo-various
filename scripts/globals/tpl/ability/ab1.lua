@@ -2,6 +2,10 @@
 TPL_ABILITY.AB1 = AbilityTpl()
     :name("技能1")
     :targetType(ability.targetType.circle)
+    :targetFilter(
+    function(this, targetUnit)
+        return targetUnit ~= nil and targetUnit:isEnemy(this:bindUnit():owner())
+    end)
     :icon("AB1")
     :coolDownAdv(2.5, -0.05)
     :hpCostAdv(150, 5)
@@ -17,15 +21,11 @@ TPL_ABILITY.AB1 = AbilityTpl()
             "对目标造成伤害：" .. colour.hex(colour.gold, "[攻击x100]")
         }
     end)
-    :castTargetFilter(
-    function(this, targetUnit)
-        return targetUnit ~= nil and targetUnit:isEnemy(this:bindUnit():owner())
-    end)
     :onEvent(eventKind.abilityEffective,
     function(effectiveData)
         local ftp = 1
         time.setInterval(ftp, function(curTimer)
-            if (false == effectiveData.triggerUnit:isAbilityKeeping()) then
+            if (false == effectiveData.triggerUnit:isCastKeeping()) then
                 class.destroy(curTimer)
                 return
             end
