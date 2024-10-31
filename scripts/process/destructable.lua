@@ -11,7 +11,7 @@ function process:onStart()
     end
     
     time.setTimeout(3, function()
-        local g = Group("destructable"):catch({
+        local g = Grid("destructable"):catch({
             circle = { x = 0, y = -500, radius = 700, }
         })
         if (#g > 0) then
