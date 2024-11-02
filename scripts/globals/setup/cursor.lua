@@ -150,15 +150,15 @@ game.onPhase("process", function()
             return false
         end
         if (true == ab:isBan()) then
-            alerter.message(p, true, ab:banReason())
+            alerter.message(p, ab:banReason())
             return false
         end
         if (selection:isInterrupt() or selection:isPause()) then
-            alerter.message(p, true, "无法行动", colour.red)
+            alerter.message(p, "无法行动", colour.red)
             return false
         end
         if (selection:isCastChanting() or selection:isCastKeeping()) then
-            alerter.message(p, true, "施法中")
+            alerter.message(p, "施法中")
             return false
         end
         return true
@@ -284,13 +284,27 @@ game.onPhase("process", function()
     cursor.setQuote(ability.targetType.none, {
         start = function()
             local data = cursor.currentData()
+            local from = data.from
             local ab = data.ability
             if (false == abilityCheck(ab)) then
                 return false
             end
-            sound.vcm("war3_MouseClick1")
-            sync.send("lk_sync_g", { "ability_effective", ab:id() })
-            cursor.quoteOver()
+            --sound.vcm("war3_MouseClick1")
+            --local amass = ab:amass()
+            --if(amass <= 0)then
+            --    sync.send("lk_sync_g", { "ability_effective", ab:id(), ab:amassRatio() })
+            --    cursor.quoteOver()
+            --else
+            --
+            --end
+        end,
+        over = function()
+            csPointer:alpha(0)
+            abilityOver()
+            if (class.isObject(_unit1, UnitClass)) then
+                J.SetUnitVertexColor(_unit1:handle(), table.unpack(_unit1:rgba()))
+            end
+            _unitU = nil
         end,
     })
     
@@ -307,7 +321,7 @@ game.onPhase("process", function()
             if (ab:isCastTarget(u)) then
                 if (_unitU == u) then
                     _unitU = nil
-                    sync.send("lk_sync_g", { "ability_effective_u", ab:id(), u:id() })
+                    sync.send("lk_sync_g", { "ability_effective_u", ab:id(), u:id(), (data.amassRatio or 1) })
                     return false
                 end
             end
@@ -391,9 +405,9 @@ game.onPhase("process", function()
             local targetUnit = _unit1
             if (class.isObject(targetUnit, UnitClass)) then
                 if (false == ab:isCastTarget(targetUnit)) then
-                    alerter.message(evtData.triggerPlayer, true, "目标不允许")
+                    alerter.message(evtData.triggerPlayer, "目标不允许")
                 else
-                    sync.send("lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id() })
+                    sync.send("lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id(), (data.amassRatio or 1) })
                     cursor.quoteOver()
                 end
             end
@@ -458,10 +472,10 @@ game.onPhase("process", function()
                 y = japi.DZ_GetMouseTerrainY(),
             }
             if (ab:isBanCursor(cond)) then
-                alerter.message(evtData.triggerPlayer, true, "无效目标")
+                alerter.message(evtData.triggerPlayer, "无效目标")
                 return
             end
-            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), (data.amassRatio or 1) })
             cursor.quoteOver()
         end,
     })
@@ -609,10 +623,10 @@ game.onPhase("process", function()
                 units = _unit1,
             }
             if (ab:isBanCursor(cond)) then
-                alerter.message(evtData.triggerPlayer, true, "无效范围")
+                alerter.message(evtData.triggerPlayer, "无效范围")
                 return
             end
-            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), (data.amassRatio or 1) })
             cursor.quoteOver()
         end,
     })
@@ -761,10 +775,10 @@ game.onPhase("process", function()
                 cond.width = ab:castWidth()
             end
             if (ab:isBanCursor(cond)) then
-                alerter.message(evtData.triggerPlayer, true, "无效范围")
+                alerter.message(evtData.triggerPlayer, "无效范围")
                 return
             end
-            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), (data.amassRatio or 1) })
             cursor.quoteOver()
         end,
     })
