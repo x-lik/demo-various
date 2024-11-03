@@ -463,7 +463,7 @@ game.onPhase("process", function()
                     alerter.message(evtData.triggerPlayer, "目标不允许")
                 else
                     if (type(data.amassStart) == "number") then
-                        local dur = data.amassDur or (japi._asyncExecDelayInc - data.amassStart)
+                        local dur = data.amassDur or (japi.AsyncInc() - data.amassStart)
                         
                         print("data.amassStart", data.amassStart, dur)
                         
@@ -563,7 +563,7 @@ game.onPhase("process", function()
                 return
             end
             if (type(data.amassStart) == "number") then
-                local dur = data.amassDur or (japi._asyncExecDelayInc - data.amassStart)
+                local dur = data.amassDur or (japi.AsyncInc() - data.amassStart)
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
             else
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
@@ -743,7 +743,7 @@ game.onPhase("process", function()
                 return
             end
             if (type(data.amassStart) == "number") then
-                local dur = data.amassDur or (japi._asyncExecDelayInc - data.amassStart)
+                local dur = data.amassDur or (japi.AsyncInc() - data.amassStart)
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
             else
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
@@ -924,7 +924,7 @@ game.onPhase("process", function()
                 return
             end
             if (type(data.amassStart) == "number") then
-                local dur = data.amassDur or (japi._asyncExecDelayInc - data.amassStart)
+                local dur = data.amassDur or (japi.AsyncInc() - data.amassStart)
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
             else
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
