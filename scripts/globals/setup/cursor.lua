@@ -193,11 +193,14 @@ game.onPhase("process", function()
     ---@param ab Ability
     ---@return boolean
     local abilityStart = function(ab)
-        cursorLock()
         ---@type UI_LikPlate
         local uiPlate = UIKit("xlik_plate")
         uiPlate:buttonBorder(ab)
-        return abilityCheck(ab)
+        if (abilityCheck(ab)) then
+            cursorLock()
+            return true
+        end
+        return false
     end
     local abilityOver = function()
         local data = cursor.currentData()
@@ -281,30 +284,58 @@ game.onPhase("process", function()
         end
     })
     
+    --- [异步]蓄力比率[0.00-1.00]
+    --- 此数据根据帧数估计
+    ---@param ab Ability
+    ---@param frames number|nil 定点帧数
+    ---@return number
+    local function _amassRatio(ab, frames)
+        return math.min(1, frames / (ab:amass()))
+    end
+    
     cursor.setQuote(ability.targetType.none, {
         start = function()
             local data = cursor.currentData()
-            local from = data.from
             local ab = data.ability
             if (false == abilityCheck(ab)) then
                 return false
             end
-            --sound.vcm("war3_MouseClick1")
-            --local amass = ab:amass()
-            --if(amass <= 0)then
-            --    sync.send("lk_sync_g", { "ability_effective", ab:id(), ab:amassRatio() })
-            --    cursor.quoteOver()
-            --else
-            --
-            --end
+            sound.vcm("war3_MouseClick1")
+            -- 常规模式回调
+            local normal = function()
+                sync.send("lk_sync_g", { "ability_effective", ab:id() })
+                cursor.quoteOver()
+            end
+            local amass = ab:amass()
+            if (amass <= 0) then
+                normal()
+            else
+                -- 蓄力模式
+                local start = function()
+                    event.asyncTrigger(ab:bindUnit(), eventKind.unitAbilityChange)
+                end
+                ---@param evtData eventOnKeyboardLongPressOver
+                local over = function(evtData)
+                    sync.send("lk_sync_g", { "ability_effective", ab:id(), _amassRatio(ab, evtData.duration) })
+                    cursor.quoteOver()
+                end
+                -- 判断data的数据确定蓄力的操作
+                if (nil ~= data.keyboard) then
+                    keyboard.onLongPress(data.keyboard, "my_cs_lp", start, normal, over)
+                elseif (true == data.mouseLeft) then
+                    mouse.onLeftLongPress("my_cs_lp", start, normal, over)
+                else
+                    normal()
+                end
+            end
         end,
         over = function()
-            csPointer:alpha(0)
-            abilityOver()
-            if (class.isObject(_unit1, UnitClass)) then
-                J.SetUnitVertexColor(_unit1:handle(), table.unpack(_unit1:rgba()))
+            local data = cursor.currentData()
+            if (nil ~= data.keyboard) then
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
+            elseif (true == data.mouseLeft) then
+                mouse.onLeftLongPress("my_cs_lp", nil, nil, nil)
             end
-            _unitU = nil
         end,
     })
     
@@ -321,11 +352,29 @@ game.onPhase("process", function()
             if (ab:isCastTarget(u)) then
                 if (_unitU == u) then
                     _unitU = nil
-                    sync.send("lk_sync_g", { "ability_effective_u", ab:id(), u:id(), (data.amassRatio or 1) })
+                    sync.send("lk_sync_g", { "ability_effective_u", ab:id(), u:id() })
                     return false
                 end
             end
             _unit1 = nil
+            local amass = ab:amass()
+            if (amass > 0 and nil ~= data.keyboard) then
+                -- 蓄力模式
+                local broken = function()
+                    data.amassStart = nil
+                    data.amassDur = nil
+                end
+                ---@param evtData eventOnKeyboardLongPressStart
+                local start = function(evtData)
+                    data.amassStart = evtData.frame
+                    data.amassDur = nil
+                end
+                ---@param evtData eventOnKeyboardLongPressOver
+                local over = function(evtData)
+                    data.amassDur = evtData.duration
+                end
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", start, broken, over)
+            end
         end,
         over = function()
             csPointer:alpha(0)
@@ -334,6 +383,12 @@ game.onPhase("process", function()
                 J.SetUnitVertexColor(_unit1:handle(), table.unpack(_unit1:rgba()))
             end
             _unitU = nil
+            local data = cursor.currentData()
+            data.amassStart = nil
+            data.amassDur = nil
+            if (nil ~= data.keyboard) then
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
+            end
         end,
         ---@param evtData eventOnMouseMove
         refresh = function(evtData)
@@ -407,7 +462,15 @@ game.onPhase("process", function()
                 if (false == ab:isCastTarget(targetUnit)) then
                     alerter.message(evtData.triggerPlayer, "目标不允许")
                 else
-                    sync.send("lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id(), (data.amassRatio or 1) })
+                    if (type(data.amassStart) == "number") then
+                        local dur = data.amassDur or (japi._asyncExecDelayInc - data.amassStart)
+                        
+                        print("data.amassStart", data.amassStart, dur)
+                        
+                        sync.send("lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id(), _amassRatio(ab, dur) })
+                    else
+                        sync.send("lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id() })
+                    end
                     cursor.quoteOver()
                 end
             end
@@ -422,10 +485,34 @@ game.onPhase("process", function()
                 return false
             end
             sound.vcm("war3_MouseClick1")
+            local amass = ab:amass()
+            if (amass > 0 and nil ~= data.keyboard) then
+                -- 蓄力模式
+                local broken = function()
+                    data.amassStart = nil
+                    data.amassDur = nil
+                end
+                ---@param evtData eventOnKeyboardLongPressStart
+                local start = function(evtData)
+                    data.amassStart = evtData.frame
+                    data.amassDur = nil
+                end
+                ---@param evtData eventOnKeyboardLongPressOver
+                local over = function(evtData)
+                    data.amassDur = evtData.duration
+                end
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", start, broken, over)
+            end
         end,
         over = function()
             csPointer:alpha(0)
             abilityOver()
+            local data = cursor.currentData()
+            data.amassStart = nil
+            data.amassDur = nil
+            if (nil ~= data.keyboard) then
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
+            end
         end,
         ---@param evtData eventOnMouseMove
         refresh = function(evtData)
@@ -475,7 +562,12 @@ game.onPhase("process", function()
                 alerter.message(evtData.triggerPlayer, "无效目标")
                 return
             end
-            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), (data.amassRatio or 1) })
+            if (type(data.amassStart) == "number") then
+                local dur = data.amassDur or (japi._asyncExecDelayInc - data.amassStart)
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
+            else
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            end
             cursor.quoteOver()
         end,
     })
@@ -491,6 +583,24 @@ game.onPhase("process", function()
             csPointer:alpha(0)
             _int1 = -1
             _unit1 = nil
+            local amass = ab:amass()
+            if (amass > 0 and nil ~= data.keyboard) then
+                -- 蓄力模式
+                local broken = function()
+                    data.amassStart = nil
+                    data.amassDur = nil
+                end
+                ---@param evtData eventOnKeyboardLongPressStart
+                local start = function(evtData)
+                    data.amassStart = evtData.frame
+                    data.amassDur = nil
+                end
+                ---@param evtData eventOnKeyboardLongPressOver
+                local over = function(evtData)
+                    data.amassDur = evtData.duration
+                end
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", start, broken, over)
+            end
         end,
         over = function()
             csArea:show(false)
@@ -501,6 +611,12 @@ game.onPhase("process", function()
                 end
             end
             _unit1 = nil
+            local data = cursor.currentData()
+            data.amassStart = nil
+            data.amassDur = nil
+            if (nil ~= data.keyboard) then
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
+            end
         end,
         ---@param evtData eventOnMouseMove
         refresh = function(evtData)
@@ -626,7 +742,12 @@ game.onPhase("process", function()
                 alerter.message(evtData.triggerPlayer, "无效范围")
                 return
             end
-            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), (data.amassRatio or 1) })
+            if (type(data.amassStart) == "number") then
+                local dur = data.amassDur or (japi._asyncExecDelayInc - data.amassStart)
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
+            else
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            end
             cursor.quoteOver()
         end,
     })
@@ -642,6 +763,24 @@ game.onPhase("process", function()
             csPointer:alpha(0)
             _int1 = -1
             _unit1 = nil
+            local amass = ab:amass()
+            if (amass > 0 and nil ~= data.keyboard) then
+                -- 蓄力模式
+                local broken = function()
+                    data.amassStart = nil
+                    data.amassDur = nil
+                end
+                ---@param evtData eventOnKeyboardLongPressStart
+                local start = function(evtData)
+                    data.amassStart = evtData.frame
+                    data.amassDur = nil
+                end
+                ---@param evtData eventOnKeyboardLongPressOver
+                local over = function(evtData)
+                    data.amassDur = evtData.duration
+                end
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", start, broken, over)
+            end
         end,
         over = function()
             csArea:show(false)
@@ -652,6 +791,12 @@ game.onPhase("process", function()
                 end
             end
             _unit1 = nil
+            local data = cursor.currentData()
+            data.amassStart = nil
+            data.amassDur = nil
+            if (nil ~= data.keyboard) then
+                keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
+            end
         end,
         ---@param evtData eventOnMouseMove
         refresh = function(evtData)
@@ -778,7 +923,12 @@ game.onPhase("process", function()
                 alerter.message(evtData.triggerPlayer, "无效范围")
                 return
             end
-            sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), (data.amassRatio or 1) })
+            if (type(data.amassStart) == "number") then
+                local dur = data.amassDur or (japi._asyncExecDelayInc - data.amassStart)
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
+            else
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
+            end
             cursor.quoteOver()
         end,
     })

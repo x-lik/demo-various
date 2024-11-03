@@ -20,6 +20,11 @@ description.define("abilityBase", function(this, options)
         table.insert(desc, this:name())
     end
     table.insert(desc, colour.hex(colour.gold, "类型: " .. tt.label))
+    local amass = this:amass()
+    if (amass > 0) then
+        table.insert(desc, colour.hex(colour.sandybrown, "蓄力最大时间: " .. this:amass(lv, true) .. " 秒"))
+        table.insert(desc, colour.hex(colour.sandybrown, "蓄力增幅极限: " .. this:amassIncrease() * amass .. "%"))
+    end
     local chantCast = this:castChant(lv)
     if (chantCast > 0) then
         table.insert(desc, colour.hex(colour.lightskyblue, "吟唱时间: " .. chantCast .. " 秒"))
