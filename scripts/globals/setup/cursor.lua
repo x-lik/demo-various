@@ -284,15 +284,6 @@ game.onPhase("process", function()
         end
     })
     
-    --- [异步]蓄力比率[0.00-1.00]
-    --- 此数据根据帧数估计
-    ---@param ab Ability
-    ---@param frames number|nil 定点帧数
-    ---@return number
-    local function _amassRatio(ab, frames)
-        return math.min(1, frames / (ab:amass()))
-    end
-    
     cursor.setQuote(ability.targetType.none, {
         start = function()
             local data = cursor.currentData()
@@ -316,7 +307,7 @@ game.onPhase("process", function()
                 end
                 ---@param evtData eventOnKeyboardLongPressOver
                 local over = function(evtData)
-                    sync.send("lk_sync_g", { "ability_effective", ab:id(), _amassRatio(ab, evtData.duration) })
+                    sync.send("lk_sync_g", { "ability_effective", ab:id(), cursor.amassRatio(evtData.duration) })
                     cursor.quoteOver()
                 end
                 -- 判断data的数据确定蓄力的操作
@@ -362,16 +353,16 @@ game.onPhase("process", function()
                 -- 蓄力模式
                 local broken = function()
                     data.amassStart = nil
-                    data.amassDur = nil
+                    data.amassDuration = nil
                 end
                 ---@param evtData eventOnKeyboardLongPressStart
                 local start = function(evtData)
                     data.amassStart = evtData.frame
-                    data.amassDur = nil
+                    data.amassDuration = nil
                 end
                 ---@param evtData eventOnKeyboardLongPressOver
                 local over = function(evtData)
-                    data.amassDur = evtData.duration
+                    data.amassDuration = evtData.duration
                 end
                 keyboard.onLongPress(data.keyboard, "my_cs_lp", start, broken, over)
             end
@@ -385,7 +376,7 @@ game.onPhase("process", function()
             _unitU = nil
             local data = cursor.currentData()
             data.amassStart = nil
-            data.amassDur = nil
+            data.amassDuration = nil
             if (nil ~= data.keyboard) then
                 keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
             end
@@ -463,11 +454,7 @@ game.onPhase("process", function()
                     alerter.message(evtData.triggerPlayer, "目标不允许")
                 else
                     if (type(data.amassStart) == "number") then
-                        local dur = data.amassDur or (japi.AsyncInc() - data.amassStart)
-                        
-                        print("data.amassStart", data.amassStart, dur)
-                        
-                        sync.send("lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id(), _amassRatio(ab, dur) })
+                        sync.send("lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id(), cursor.amassRatio() })
                     else
                         sync.send("lk_sync_g", { "ability_effective_u", ab:id(), targetUnit:id() })
                     end
@@ -490,16 +477,16 @@ game.onPhase("process", function()
                 -- 蓄力模式
                 local broken = function()
                     data.amassStart = nil
-                    data.amassDur = nil
+                    data.amassDuration = nil
                 end
                 ---@param evtData eventOnKeyboardLongPressStart
                 local start = function(evtData)
                     data.amassStart = evtData.frame
-                    data.amassDur = nil
+                    data.amassDuration = nil
                 end
                 ---@param evtData eventOnKeyboardLongPressOver
                 local over = function(evtData)
-                    data.amassDur = evtData.duration
+                    data.amassDuration = evtData.duration
                 end
                 keyboard.onLongPress(data.keyboard, "my_cs_lp", start, broken, over)
             end
@@ -509,7 +496,7 @@ game.onPhase("process", function()
             abilityOver()
             local data = cursor.currentData()
             data.amassStart = nil
-            data.amassDur = nil
+            data.amassDuration = nil
             if (nil ~= data.keyboard) then
                 keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
             end
@@ -563,8 +550,7 @@ game.onPhase("process", function()
                 return
             end
             if (type(data.amassStart) == "number") then
-                local dur = data.amassDur or (japi.AsyncInc() - data.amassStart)
-                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), cursor.amassRatio() })
             else
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
             end
@@ -588,16 +574,16 @@ game.onPhase("process", function()
                 -- 蓄力模式
                 local broken = function()
                     data.amassStart = nil
-                    data.amassDur = nil
+                    data.amassDuration = nil
                 end
                 ---@param evtData eventOnKeyboardLongPressStart
                 local start = function(evtData)
                     data.amassStart = evtData.frame
-                    data.amassDur = nil
+                    data.amassDuration = nil
                 end
                 ---@param evtData eventOnKeyboardLongPressOver
                 local over = function(evtData)
-                    data.amassDur = evtData.duration
+                    data.amassDuration = evtData.duration
                 end
                 keyboard.onLongPress(data.keyboard, "my_cs_lp", start, broken, over)
             end
@@ -613,7 +599,7 @@ game.onPhase("process", function()
             _unit1 = nil
             local data = cursor.currentData()
             data.amassStart = nil
-            data.amassDur = nil
+            data.amassDuration = nil
             if (nil ~= data.keyboard) then
                 keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
             end
@@ -743,8 +729,7 @@ game.onPhase("process", function()
                 return
             end
             if (type(data.amassStart) == "number") then
-                local dur = data.amassDur or (japi.AsyncInc() - data.amassStart)
-                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), cursor.amassRatio() })
             else
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
             end
@@ -768,16 +753,16 @@ game.onPhase("process", function()
                 -- 蓄力模式
                 local broken = function()
                     data.amassStart = nil
-                    data.amassDur = nil
+                    data.amassDuration = nil
                 end
                 ---@param evtData eventOnKeyboardLongPressStart
                 local start = function(evtData)
                     data.amassStart = evtData.frame
-                    data.amassDur = nil
+                    data.amassDuration = nil
                 end
                 ---@param evtData eventOnKeyboardLongPressOver
                 local over = function(evtData)
-                    data.amassDur = evtData.duration
+                    data.amassDuration = evtData.duration
                 end
                 keyboard.onLongPress(data.keyboard, "my_cs_lp", start, broken, over)
             end
@@ -793,7 +778,7 @@ game.onPhase("process", function()
             _unit1 = nil
             local data = cursor.currentData()
             data.amassStart = nil
-            data.amassDur = nil
+            data.amassDuration = nil
             if (nil ~= data.keyboard) then
                 keyboard.onLongPress(data.keyboard, "my_cs_lp", nil, nil, nil)
             end
@@ -924,8 +909,7 @@ game.onPhase("process", function()
                 return
             end
             if (type(data.amassStart) == "number") then
-                local dur = data.amassDur or (japi.AsyncInc() - data.amassStart)
-                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), _amassRatio(ab, dur) })
+                sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ(), cursor.amassRatio() })
             else
                 sync.send("lk_sync_g", { "ability_effective_xyz", ab:id(), cond.x, cond.y, japi.DZ_GetMouseTerrainZ() })
             end
