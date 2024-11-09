@@ -21,8 +21,15 @@ function process:onStart()
     button:onEvent(eventKind.uiLeftClick, "x2", function()
         print("click2")
     end)
-    button:onEvent(eventKind.uiEnter, "x2", function()
-        print("uiEnteruiEnteruiEnter")
+    button:onEvent(eventKind.uiEnter, "x3", function()
+        print("uiEnter")
+    end)
+    button:onEvent(eventKind.uiLeave, "x3", function()
+        print("uiLeave")
+    end)
+    ---@param evtData eventOnUIWheel
+    button:onEvent(eventKind.uiWheel, "x3", function(evtData)
+        print("delta", evtData.delta)
     end)
     
     button:tooltips({
