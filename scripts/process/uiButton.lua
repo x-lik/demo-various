@@ -10,10 +10,37 @@ function process:onStart()
     })
     
     button:adaptive(true)
-    button:relation(UI_ALIGN_CENTER, UIGame, UI_ALIGN_CENTER, 0, 0)
-    button:size(0.1, 0.1)
+    button:relation(UI_ALIGN_RIGHT_TOP, UIGame, UI_ALIGN_RIGHT_TOP, -0.05, -0.03)
+    button:relation(UI_ALIGN_RIGHT_BOTTOM, UIGame, UI_ALIGN_RIGHT_BOTTOM, japi.UIDisAdaptive(-0.3), 0.05)
+    button:size(0.08, 0.08)
     button:texture("icon/ability/CleavingAttack")
     button:maskAlpha(160)
+    
+    button:onEvent(eventKind.uiLeftClick, "x1", function()
+        print("click1")
+    end)
+    button:onEvent(eventKind.uiLeftClick, "x2", function()
+        print("click2")
+    end)
+    button:onEvent(eventKind.uiEnter, "x2", function()
+        print("uiEnteruiEnteruiEnter")
+    end)
+    
+    button:tooltips({
+        tips = {
+            "border/square_orangeRed/01",
+            "border/square_orangeRed/02",
+            "border/square_orangeRed/03",
+            "border/square_orangeRed/04",
+            "border/square_orangeRed/05",
+            "border/square_orangeRed/06",
+            "border/square_orangeRed/07",
+            "border/square_orangeRed/08",
+            "border/square_orangeRed/09",
+            "border/square_orangeRed/10",
+            "border/square_orangeRed/11",
+        }
+    })
     
     button:border({
         "border/square_orangeRed/01",
@@ -31,79 +58,79 @@ function process:onStart()
     
     --button:mask("mask/rounded.blp")
     button:mask({
-        "interfaces/maskRotate00.blp",
-        "interfaces/maskRotate01.blp",
-        "interfaces/maskRotate02.blp",
-        "interfaces/maskRotate03.blp",
-        "interfaces/maskRotate04.blp",
-        "interfaces/maskRotate05.blp",
-        "interfaces/maskRotate06.blp",
-        "interfaces/maskRotate07.blp",
-        "interfaces/maskRotate08.blp",
-        "interfaces/maskRotate09.blp",
-        "interfaces/maskRotate10.blp",
-        "interfaces/maskRotate11.blp",
-        "interfaces/maskRotate12.blp",
-        "interfaces/maskRotate13.blp",
-        "interfaces/maskRotate14.blp",
-        "interfaces/maskRotate15.blp",
-        "interfaces/maskRotate16.blp",
-        "interfaces/maskRotate17.blp",
-        "interfaces/maskRotate18.blp",
-        "interfaces/maskRotate19.blp",
-        "interfaces/maskRotate20.blp",
-        "interfaces/maskRotate21.blp",
-        "interfaces/maskRotate22.blp",
-        "interfaces/maskRotate23.blp",
-        "interfaces/maskRotate24.blp",
-        "interfaces/maskRotate25.blp",
-        "interfaces/maskRotate26.blp",
-        "interfaces/maskRotate27.blp",
-        "interfaces/maskRotate28.blp",
-        "interfaces/maskRotate29.blp",
-        "interfaces/maskRotate30.blp",
-        "interfaces/maskRotate31.blp",
-        "interfaces/maskRotate32.blp",
-        "interfaces/maskRotate33.blp",
-        "interfaces/maskRotate34.blp",
-        "interfaces/maskRotate35.blp",
-        "interfaces/maskRotate36.blp",
-        "interfaces/maskRotate37.blp",
-        "interfaces/maskRotate38.blp",
-        "interfaces/maskRotate39.blp",
-        "interfaces/maskRotate40.blp",
-        "interfaces/maskRotate41.blp",
-        "interfaces/maskRotate42.blp",
-        "interfaces/maskRotate43.blp",
-        "interfaces/maskRotate44.blp",
-        "interfaces/maskRotate45.blp",
-        "interfaces/maskRotate46.blp",
-        "interfaces/maskRotate47.blp",
-        "interfaces/maskRotate48.blp",
-        "interfaces/maskRotate49.blp",
-        "interfaces/maskRotate50.blp",
-        "interfaces/maskRotate51.blp",
-        "interfaces/maskRotate52.blp",
-        "interfaces/maskRotate53.blp",
-        "interfaces/maskRotate54.blp",
-        "interfaces/maskRotate55.blp",
-        "interfaces/maskRotate56.blp",
-        "interfaces/maskRotate57.blp",
-        "interfaces/maskRotate58.blp",
-        "interfaces/maskRotate59.blp",
+        "mask/roundedRotate/00.blp",
+        "mask/roundedRotate/01.blp",
+        "mask/roundedRotate/02.blp",
+        "mask/roundedRotate/03.blp",
+        "mask/roundedRotate/04.blp",
+        "mask/roundedRotate/05.blp",
+        "mask/roundedRotate/06.blp",
+        "mask/roundedRotate/07.blp",
+        "mask/roundedRotate/08.blp",
+        "mask/roundedRotate/09.blp",
+        "mask/roundedRotate/10.blp",
+        "mask/roundedRotate/11.blp",
+        "mask/roundedRotate/12.blp",
+        "mask/roundedRotate/13.blp",
+        "mask/roundedRotate/14.blp",
+        "mask/roundedRotate/15.blp",
+        "mask/roundedRotate/16.blp",
+        "mask/roundedRotate/17.blp",
+        "mask/roundedRotate/18.blp",
+        "mask/roundedRotate/19.blp",
+        "mask/roundedRotate/20.blp",
+        "mask/roundedRotate/21.blp",
+        "mask/roundedRotate/22.blp",
+        "mask/roundedRotate/23.blp",
+        "mask/roundedRotate/24.blp",
+        "mask/roundedRotate/25.blp",
+        "mask/roundedRotate/26.blp",
+        "mask/roundedRotate/27.blp",
+        "mask/roundedRotate/28.blp",
+        "mask/roundedRotate/29.blp",
+        "mask/roundedRotate/30.blp",
+        "mask/roundedRotate/31.blp",
+        "mask/roundedRotate/32.blp",
+        "mask/roundedRotate/33.blp",
+        "mask/roundedRotate/34.blp",
+        "mask/roundedRotate/35.blp",
+        "mask/roundedRotate/36.blp",
+        "mask/roundedRotate/37.blp",
+        "mask/roundedRotate/38.blp",
+        "mask/roundedRotate/39.blp",
+        "mask/roundedRotate/40.blp",
+        "mask/roundedRotate/41.blp",
+        "mask/roundedRotate/42.blp",
+        "mask/roundedRotate/43.blp",
+        "mask/roundedRotate/44.blp",
+        "mask/roundedRotate/45.blp",
+        "mask/roundedRotate/46.blp",
+        "mask/roundedRotate/47.blp",
+        "mask/roundedRotate/48.blp",
+        "mask/roundedRotate/49.blp",
+        "mask/roundedRotate/50.blp",
+        "mask/roundedRotate/51.blp",
+        "mask/roundedRotate/52.blp",
+        "mask/roundedRotate/53.blp",
+        "mask/roundedRotate/54.blp",
+        "mask/roundedRotate/55.blp",
+        "mask/roundedRotate/56.blp",
+        "mask/roundedRotate/57.blp",
+        "mask/roundedRotate/58.blp",
+        "mask/roundedRotate/59.blp",
     })
     
-    local r = 0
-    bubble.t1 = time.setInterval(0.03, function(cutTimer)
-        r = r + 0.5
-        if (r > 100) then
-            class.destroy(cutTimer)
-            bubble.t1 = nil
-            button:maskRatio(0)
-            return
-        end
-        button:maskRatio(0.01 * r)
-    end)
+    --local r = 0
+    --bubble.t1 = time.setInterval(0.03, function(cutTimer)
+    --    r = r + 0.5
+    --    if (r > 100) then
+    --        class.destroy(cutTimer)
+    --        bubble.t1 = nil
+    --        button:maskRatio(0)
+    --        return
+    --    end
+    --    button:maskRatio(0.01 * r)
+    --end)
     
     bubble.ui = button
 end

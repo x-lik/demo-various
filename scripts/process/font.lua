@@ -3,7 +3,7 @@ local process = Process("font")
 function process:onStart()
     
     time.setInterval(1, function()
-        UITooltips(1)
+        UITooltips()
               :absolut(UI_ALIGN_TOP, 0, -0.1)
               :content(
             {
@@ -18,7 +18,7 @@ function process:onStart()
                 }
             }):show(true)
         UITooltips(2)
-              :relation(UI_ALIGN_TOP, UITooltips(1), UI_ALIGN_BOTTOM, 0, -0.01)
+              :relation(UI_ALIGN_TOP, UITooltips(), UI_ALIGN_BOTTOM, 0, -0.01)
               :content(
             {
                 padding = { 0, 0, 0, 0 },
