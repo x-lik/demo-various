@@ -4,12 +4,12 @@ function process:onStart()
     
     -- missile
     --do
-    --    local num = 2000
+    --    local num = 1000
     --    for _ = 1, num do
     --        local x1, y1 = math.rand(-3000, -1500), math.rand(-2000, 2000)
     --        local x2, y2 = math.rand(1500, 3000), math.rand(-2000, 2000)
     --        local h = math.rand(800, 1000)
-    --        ability.missile({
+    --        ability.missileLite({
     --            model = "ProcMissile",
     --            sourceVec = { x1, y1 },
     --            targetVec = { x2, y2 },
@@ -150,26 +150,26 @@ function process:onStart()
     --end
     
     --- uiEventRegister
-    do
-        local bubble = self:bubble()
-        local ui = UIButton("testUIForUIEventReg", UIGame)
-        bubble.ui = ui
-        collectgarbage("collect")
-        local x1 = os.clock()
-        for _ = 1, 100000 do
-            --- reg
-            ui:onEvent(eventKind.uiLeftClick, "xxx", function() end)
-            ui:onEvent(eventKind.uiEnter, "xxx", function() end)
-            --- modify
-            ui:onEvent(eventKind.uiLeftClick, "xxx", function() end)
-            ui:onEvent(eventKind.uiEnter, "xxx", nil)
-            --- modify
-            ui:onEvent(eventKind.uiLeftClick, "xxx", nil)
-            ui:onEvent(eventKind.uiEnter, "xxx", function() end)
-            --- unreg
-            ui:onEvent(eventKind.uiEnter, "xxx", nil)
-        end
-        print(string.format("Time: %.3f", os.clock() - x1))
-    end
+    --do
+    --    local bubble = self:bubble()
+    --    local ui = UIButton("testUIForUIEventReg", UIGame)
+    --    bubble.ui = ui
+    --    collectgarbage("collect")
+    --    local x1 = os.clock()
+    --    for _ = 1, 100000 do
+    --        --- reg
+    --        ui:onEvent(eventKind.uiLeftClick, "xxx", function() end)
+    --        ui:onEvent(eventKind.uiEnter, "xxx", function() end)
+    --        --- modify
+    --        ui:onEvent(eventKind.uiLeftClick, "xxx", function() end)
+    --        ui:onEvent(eventKind.uiEnter, "xxx", nil)
+    --        --- modify
+    --        ui:onEvent(eventKind.uiLeftClick, "xxx", nil)
+    --        ui:onEvent(eventKind.uiEnter, "xxx", function() end)
+    --        --- unreg
+    --        ui:onEvent(eventKind.uiEnter, "xxx", nil)
+    --    end
+    --    print(string.format("Time: %.3f", os.clock() - x1))
+    --end
 
 end
