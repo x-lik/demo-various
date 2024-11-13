@@ -6,6 +6,6 @@ function process:onStart()
     fog.enable(not LK_DEBUG)
     fog.maskEnable(not LK_DEBUG)
     
-    self:next("performance")
+    self:next("grid")
 
 end
