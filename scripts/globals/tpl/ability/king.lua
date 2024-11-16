@@ -13,10 +13,11 @@ TPL_ABILITY.King = AbilityTpl()
     :onUnitEvent(eventKind.unitAttack, "lightningChain",
     function(attackData)
         ability.lightningChain({
-            qty = 3,
+            qty = 5,
             sourceUnit = attackData.triggerUnit,
             targetUnit = attackData.targetUnit,
             damage = 100,
+            rate = -10,
             damageSrc = injury.damageSrc.ability,
             damageType = injury.damageType.thunder
         })
