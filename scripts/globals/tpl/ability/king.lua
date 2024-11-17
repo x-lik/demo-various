@@ -12,15 +12,17 @@ TPL_ABILITY.King = AbilityTpl()
     })
     :onUnitEvent(eventKind.unitAttack, "lightningChain",
     function(attackData)
-        ability.lightningChain({
-            qty = 5,
-            sourceUnit = attackData.triggerUnit,
-            targetUnit = attackData.targetUnit,
-            damage = 100,
-            rate = -10,
-            damageSrc = injury.damageSrc.ability,
-            damageType = injury.damageType.thunder
-        })
+        if (nil ~= ability.lightningChain) then
+            ability.lightningChain({
+                qty = 5,
+                sourceUnit = attackData.triggerUnit,
+                targetUnit = attackData.targetUnit,
+                damage = 100,
+                rate = -10,
+                damageSrc = injury.damageSrc.ability,
+                damageType = injury.damageType.thunder
+            })
+        end
     end)
     :modify("atk", 0)
     :onUnitEvent(eventKind.unitAttack,
@@ -42,17 +44,17 @@ TPL_ABILITY.King = AbilityTpl()
         attackData.triggerAbility._atkTarget = attackData.targetUnit:id()
         if (diff ~= 0) then
             if (diff > 0) then
-                attackData.triggerUnit:crit("+=" .. (diff * 5))
+                attackData.triggerUnit:modify("crit", "+=" .. (diff * 5))
                 attackData.triggerUnit:odds("crit", "+=" .. (diff * 2.5))
             elseif (diff < 0) then
-                attackData.triggerUnit:crit("-=" .. (-diff * 5))
+                attackData.triggerUnit:modify("crit", "-=" .. (-diff * 5))
                 attackData.triggerUnit:odds("crit", "-=" .. (-diff * 2.5))
             end
             attackData.triggerAbility._atkTimer = time.setTimeout(3, function()
                 if (class.isDestroy(attackData.triggerAbility) == false) then
                     local a = attackData.triggerAbility._atk
                     if (a > 0) then
-                        attackData.triggerUnit:crit("-=" .. (a * 5))
+                        attackData.triggerUnit:modify("crit", "-=" .. (a * 5))
                         attackData.triggerUnit:odds("crit", "-=" .. (a * 2.5))
                     end
                     attackData.triggerAbility._atkTimer = nil
