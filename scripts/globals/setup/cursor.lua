@@ -33,24 +33,13 @@ game.onPhase("process", function()
         if (cursor.isQuoting()) then
             return
         end
-        ---@type Unit|Item
-        local under = class.h2o(japi.DZ_GetUnitUnderMouse())
+        ---@type Unit|Item|nil
+        local under
         local tx, ty = -1, -1
         local tips, textAlign
         local fontSize = 9
-        if (class.isObject(under, UnitClass)) then
-            --- If Unit
-            if (under:owner() ~= evtData.triggerPlayer and false == under:isEnemy(evtData.triggerPlayer)) then
-                tx, ty = japi.UIDisAdaptive(evtData.rx), evtData.ry + 0.024
-                if (under:level() > 0) then
-                    tips = { "等级 " .. under:level(), under:name() }
-                else
-                    tips = { under:name() }
-                end
-                textAlign = TEXT_ALIGN_CENTER
-            end
-        elseif (nil ~= class._cache[GridClass] and nil ~= class._cache[GridClass][ItemClass]) then
-            --- If Item
+        if (nil ~= class._cache[GridClass] and nil ~= class._cache[GridClass][ItemClass]) then
+            --- Prioritize search Item
             under = Grid(ItemClass):closest({
                 circle = {
                     x = japi.DZ_GetMouseTerrainX(),
@@ -70,13 +59,28 @@ game.onPhase("process", function()
                 textAlign = TEXT_ALIGN_LEFT
             end
         end
+        if (nil == under) then
+            --- Then look for the Unit
+            under = class.h2o(japi.DZ_GetUnitUnderMouse())
+            if (class.isObject(under, UnitClass)) then
+                if (under:owner() ~= evtData.triggerPlayer and false == under:isEnemy(evtData.triggerPlayer)) then
+                    tx, ty = japi.UIDisAdaptive(evtData.rx), evtData.ry + 0.024
+                    if (under:level() > 0) then
+                        tips = { "等级 " .. under:level(), under:name() }
+                    else
+                        tips = { under:name() }
+                    end
+                    textAlign = TEXT_ALIGN_CENTER
+                end
+            end
+        end
         if (nil ~= lastUnder and under ~= lastUnder) then
             if (class.isObject(lastUnder, ItemClass) and true == lastUnder:instance()) then
                 japi.DZ_SetEffectVertexAlpha(lastUnder._handle._handle, 125)
             end
             lastUnder = nil
         end
-        if (nil == tips) then
+        if (nil == under or nil == tips) then
             UITooltips(3):show(false)
             return
         end
