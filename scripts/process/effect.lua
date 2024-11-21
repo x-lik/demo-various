@@ -32,7 +32,7 @@ end
 
 function process:onOver()
     local bubble = self:bubble()
-    effector.destroy(bubble.timer)
+    class.destroy(bubble.timer)
     effector.destroy(bubble.eff)
 end
 
