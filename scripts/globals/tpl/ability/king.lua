@@ -12,7 +12,7 @@ TPL_ABILITY.King = AbilityTpl()
     })
     :onUnitEvent(eventKind.unitAttack, "lightningChain",
     function(attackData)
-        if (nil ~= ability.lightningChain) then
+        if (nil ~= ability and nil ~= ability.lightningChain) then
             ability.lightningChain({
                 qty = 5,
                 sourceUnit = attackData.triggerUnit,
