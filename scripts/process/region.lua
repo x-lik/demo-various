@@ -3,17 +3,14 @@ local process = Process("region")
 function process:onStart()
     
     local r = Region("中心判断区", "square", 0, 0, 500, 500)
-    ---@param enterData eventOnRegionEnter
-    r:onEnter(function(enterData)
+    r:splat(BLP_COLOR_BLUE, 200)
+    r:onEnter(function(evtData)
         print("Enter")
-        print(enterData.triggerRegion:name())
-        print(enterData.triggerUnit:name())
+        print(evtData.triggerUnit:name() .. "进入了" .. evtData.triggerRegion:name())
     end)
-    ---@param enterData eventOnRegionLeave
-    r:onLeave(function(enterData)
+    r:onLeave(function(evtData)
         print("Leave")
-        print(enterData.triggerRegion:name())
-        print(enterData.triggerUnit:name())
+        print(evtData.triggerUnit:name() .. "离开了" .. evtData.triggerRegion:name())
     end)
     
     Unit(Player(1), TPL_UNIT.HeroFlameLord, 0, 0, 270)
