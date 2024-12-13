@@ -1,3 +1,4 @@
+--assets_image("border/square_orangeRed/*") -- 序列模式
 assets_image("border/square_orangeRed/01")
 assets_image("border/square_orangeRed/02")
 assets_image("border/square_orangeRed/03")

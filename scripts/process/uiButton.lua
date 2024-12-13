@@ -48,6 +48,7 @@ function process:onStart()
         }
     })
     
+    --button:border(japi.AssetsImage("border/square_orangeRed/*"), 5) -- 序列模式
     button:border({
         "border/square_orangeRed/01",
         "border/square_orangeRed/02",
@@ -63,6 +64,7 @@ function process:onStart()
     }, 5)
     
     --button:mask("mask/rounded.blp")
+    --button:mask(japi.AssetsImage("mask/roundedRotate/*")) -- 序列模式
     button:mask({
         "mask/roundedRotate/00.blp",
         "mask/roundedRotate/01.blp",

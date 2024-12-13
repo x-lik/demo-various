@@ -1,4 +1,5 @@
 assets_image("mask/rounded.blp")
+--assets_image("mask/roundedRotate/*") -- 序列模式
 assets_image("mask/roundedRotate/00.blp")
 assets_image("mask/roundedRotate/01.blp")
 assets_image("mask/roundedRotate/02.blp")
