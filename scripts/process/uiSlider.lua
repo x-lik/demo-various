@@ -14,8 +14,8 @@ function process:onStart()
     bubble.bar3:relation(UI_ALIGN_LEFT_TOP, bubble.bar2, UI_ALIGN_LEFT_BOTTOM, 0.004, -0.004)
     bubble.bar4:relation(UI_ALIGN_RIGHT_TOP, bubble.bar2, UI_ALIGN_RIGHT_BOTTOM, -0.004, -0.004)
     
-    bubble.bar1:thumbScale(0.5, 0.8):size(0.22, 0.03)
-    bubble.bar2:thumbScale(1.3, 1.2):size(0.24, 0.04)
+    bubble.bar1:thumbScale(0.5, 1.0):size(0.22, 0.03)
+    bubble.bar2:thumbScale(1.3, 0.8):size(0.24, 0.04)
     bubble.bar3:thumbScale(1.3, 0.5):size(0.03, 0.26)
     bubble.bar4:thumbScale(0.5, 1.1):size(0.05, 0.23)
     for i = 1, 4 do
