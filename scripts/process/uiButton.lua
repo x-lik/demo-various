@@ -7,6 +7,7 @@ function process:onStart()
     local button = UIButton("myButton", UIGame, {
         _hasBorder = false,
         _hasMark = true,
+        _highlightFdfName = "LK_HIGHLIGHT_NIGHTELF_OPTIONS",
     })
     
     button:adaptive(true)
