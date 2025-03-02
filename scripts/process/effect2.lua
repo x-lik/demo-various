@@ -8,7 +8,7 @@ function process:onStart()
     local v255 = 255
     async.call(Player(1), function()
         bubble.timer = async.setInterval(1, function()
-            local model
+            local model = nil
             if (status) then
                 v255 = v255 + 2
                 size = size - 0.03
