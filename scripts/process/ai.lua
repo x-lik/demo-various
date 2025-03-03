@@ -8,6 +8,6 @@ function process:onStart()
     local u = Unit(Player(1), TPL_UNIT.Footman, 0, -200, 270)
     bubble.u1 = u
     
-    AI("loiter"):link(u)
+    AI("wander"):link(u)
     
 end
