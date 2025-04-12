@@ -8,15 +8,15 @@ function process:onStart()
     
     -- case1
     do
-        bb.region:weatherInsert(weather.type.rainstorm)
+        bb.region:weatherInsert(weather.kind.rainstorm)
         time.setTimeout(3, function()
-            bb.region:weatherRemove(weather.type.rainstorm)
+            bb.region:weatherRemove(weather.kind.rainstorm)
         end)
     end
     
     -- case2
     do
-        local w = weather.create(weather.type.snowstorm, bb.region)
+        local w = weather.create(weather.kind.snowstorm, bb.region)
         time.setTimeout(5, function()
             weather.destroy(w)
         end)

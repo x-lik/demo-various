@@ -10,7 +10,7 @@ function process:onStart()
     
     local a1 = Assault({ mode = "missile", model = "BlackArrowMissile", homing = true, height = 300, speed = 800 })
     local a2 = Assault({ mode = "missile", model = "BlackArrowMissile", homing = false, height = 0, speed = 800, twist = true })
-    local a3 = Assault({ mode = "lightning", model = lightning.type.thunderRed, focus = 10 })
+    local a3 = Assault({ mode = "lightning", model = lightning.kind.thunderRed, focus = 10 })
     bubble.DarkRanger:assaultPush(a1)
     --bubble.DarkRanger:assaultPush(a2)
     --bubble.DarkRanger:assaultPush(a3)
